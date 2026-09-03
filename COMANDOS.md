@@ -8,9 +8,11 @@
 | `/consultar` | Responder com base nas evidências do OS | resposta com fontes e lacunas |
 | `/sessao` | Fechar ou retomar uma sessão de trabalho | `memoria.md` + `saidas/RETOMAR.md` |
 | `/conectar` | Escolher e testar uma fonte pelo caminho mais simples | primeira fonte + registro em `conexoes.md` |
+| `/mapear-fontes` | Entrevistar, priorizar e preparar as fontes que valem ser conectadas | `conexoes/MAPA-DE-FONTES.md` |
 | `/search-connectors` | Pesquisar formas atuais de conectar qualquer aplicativo | comparação oficial, recomendação e primeiro teste |
 | `/briefing-manha` | Priorizar o dia com o contexto disponível | `saidas/diario/AAAA-MM-DD-briefing.md` |
 | `/criar-rotina` | Desenhar uma rotina repetível e testável | `rotinas/<slug>.md` em estado DRAFT |
+| `/design-system` | Extrair uma marca existente ou conduzir a construção de um sistema visual | `projetos/<slug>/design-system/` |
 
 Você também pode pedir em linguagem natural. Os comandos existem para tornar o procedimento previsível e auditável.
 

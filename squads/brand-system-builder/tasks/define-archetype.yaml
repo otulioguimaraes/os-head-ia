@@ -1,0 +1,67 @@
+name: define-archetype
+version: 1.0.0
+description: "Guide user through Jung archetype selection for the brand. Presents 12 archetypes with examples, user selects primary and secondary."
+agent: brand-strategist
+
+metadata:
+  elicit: true
+  phase: 1
+  order: 2
+
+inputs:
+  - name: positioning
+    type: file
+    required: true
+    path: "brand-output/docs/01-strategy/positioning.md"
+    description: "Brand positioning document from discover-brand"
+
+outputs:
+  - name: archetype
+    type: file
+    format: markdown
+    path: "brand-output/docs/01-strategy/archetype.md"
+    description: "Brand archetype profile document"
+
+steps:
+  - id: analyze-positioning
+    action: extract-personality-traits
+    description: |
+      Read positioning.md and extract:
+      - Brand personality traits
+      - Communication tone
+      - Audience expectations
+      - Market positioning
+
+  - id: present-archetypes
+    action: guided-selection
+    depends_on: [analyze-positioning]
+    description: |
+      Present 12 Jung archetypes with:
+      - Name and description
+      - Key traits and values
+      - Famous brand examples
+      - Why it might fit (based on positioning)
+
+      Recommend top 3 based on positioning analysis.
+      User selects PRIMARY archetype.
+
+  - id: select-secondary
+    action: guided-selection
+    depends_on: [present-archetypes]
+    description: |
+      Present remaining archetypes as secondary options.
+      Explain how primary + secondary create brand depth.
+      User selects SECONDARY archetype.
+
+  - id: generate-profile
+    action: write-document
+    depends_on: [select-secondary]
+    description: |
+      Generate archetype.md using archetype-tmpl.md template.
+      Sections: Primary Archetype (name, traits, values, voice),
+      Secondary Archetype, Brand Personality Map,
+      Communication Guidelines, Do/Don't examples.
+
+error_handling:
+  on_validation_error: "Positioning document required. Run discover-brand first."
+  retry_count: 1

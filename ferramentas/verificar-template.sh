@@ -17,9 +17,23 @@ for item in "${REQUIRED[@]}"; do
   [[ -f "$OS_ROOT/$item" ]] || { echo "ERRO: arquivo obrigatório ausente: $item" >&2; exit 1; }
 done
 
-EXPECTED_SKILLS=(iniciar registrar-projeto ingerir consultar sessao conectar search-connectors briefing-manha criar-rotina fechar-semana montar-semana)
+EXPECTED_SKILLS=(iniciar registrar-projeto ingerir consultar sessao conectar mapear-fontes search-connectors briefing-manha criar-rotina fechar-semana montar-semana design-system)
 for skill in "${EXPECTED_SKILLS[@]}"; do
   [[ -f "$OS_ROOT/skills/os/$skill/SKILL.md" ]] || { echo "ERRO: skill ausente: $skill" >&2; exit 1; }
+done
+
+SQUAD_REQUIRED=(
+  squads/brand-system-builder/README.md
+  squads/brand-system-builder/PLAYBOOK.md
+  squads/brand-system-builder/squad.yaml
+  squads/brand-system-builder/workflows/brand-system-pipeline.yaml
+  squads/brand-system-builder/agents/brand-strategist.yaml
+  squads/brand-system-builder/agents/visual-designer.yaml
+  squads/brand-system-builder/agents/component-builder.yaml
+  squads/brand-system-builder/agents/brand-assembler.yaml
+)
+for item in "${SQUAD_REQUIRED[@]}"; do
+  [[ -f "$OS_ROOT/$item" ]] || { echo "ERRO: arquivo obrigatório do squad ausente: $item" >&2; exit 1; }
 done
 
 if grep -RIl --exclude-dir=dist --exclude='verificar-template.sh' '\[TODO' "$OS_ROOT" | grep -q .; then

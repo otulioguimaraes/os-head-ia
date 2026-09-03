@@ -1,0 +1,141 @@
+name: build-effects
+version: 1.0.0
+description: "Create visual effects library with CSS-only effects, animations, and decorative patterns using design tokens."
+agent: visual-designer
+
+metadata:
+  elicit: false
+  phase: 5
+  order: 2
+
+inputs:
+  - name: tokens_css
+    type: file
+    required: true
+    path: "brand-output/tokens/tokens.css"
+  - name: brand_config
+    type: file
+    required: true
+    path: "brand-config.yaml"
+  - name: motion_tokens
+    type: file
+    required: true
+    path: "brand-output/tokens/motion.json"
+
+outputs:
+  - name: effects_html
+    type: file
+    format: html
+    path: "brand-output/preview/effects.html"
+  - name: effects_doc
+    type: file
+    format: markdown
+    path: "brand-output/docs/04-components/effects.md"
+
+steps:
+  - id: read-brand-config
+    action: load-config
+    description: |
+      Read brand-config.yaml for:
+      - Brand colors for effect theming
+      - Typography for text effects
+      - Logo/name for header
+
+  - id: build-ticker-effects
+    action: create-effect
+    depends_on: [read-brand-config]
+    description: |
+      Build ticker/marquee effects:
+      - Horizontal scrolling text strip
+      - Infinite loop animation
+      - Configurable speed and direction
+      - Brand-colored variants
+
+  - id: build-badge-effects
+    action: create-effect
+    depends_on: [read-brand-config]
+    description: |
+      Build badge/label effects:
+      - Glow badges with brand colors
+      - Pulse animation badges
+      - Rotating/spinning badges
+      - Notification dot with animation
+
+  - id: build-glow-effects
+    action: create-effect
+    depends_on: [read-brand-config]
+    description: |
+      Build glow effects:
+      - Box glow (brand primary color)
+      - Text glow
+      - Border glow on hover
+      - Pulsing glow animation
+
+  - id: build-hover-effects
+    action: create-effect
+    depends_on: [read-brand-config]
+    description: |
+      Build advanced hover effects:
+      - Scale + shadow lift
+      - Color shift transitions
+      - Underline animations (slide, expand)
+      - Image zoom on hover
+      - Card tilt/3D effect
+
+  - id: build-gradient-effects
+    action: create-effect
+    depends_on: [read-brand-config]
+    description: |
+      Build gradient effects:
+      - Linear gradient backgrounds
+      - Radial gradient spotlights
+      - Gradient text (clip)
+      - Animated gradient shift
+      - Mesh gradient patterns
+
+  - id: build-text-effects
+    action: create-effect
+    depends_on: [read-brand-config]
+    description: |
+      Build text effects:
+      - Gradient text
+      - Stroke/outline text
+      - Text shadow effects
+      - Typewriter animation
+      - Character-by-character reveal
+
+  - id: build-blur-effects
+    action: create-effect
+    depends_on: [read-brand-config]
+    description: |
+      Build blur/glass effects:
+      - Glassmorphism panels
+      - Frosted glass overlay
+      - Background blur with opacity
+      - Focus blur (depth of field)
+
+  - id: build-pulse-effects
+    action: create-effect
+    depends_on: [read-brand-config]
+    description: |
+      Build pulse/rhythm effects:
+      - Pulsing circles
+      - Breathing animations
+      - Ripple effects
+      - Heartbeat patterns
+
+  - id: assemble-effects-page
+    action: compile-html
+    depends_on: [build-ticker-effects, build-badge-effects, build-glow-effects, build-hover-effects, build-gradient-effects, build-text-effects, build-blur-effects, build-pulse-effects]
+    description: |
+      Compile all effects into effects.html:
+      - Navigation header with brand logo
+      - Each effect category in its own showcase section
+      - Live interactive demos
+      - CSS code snippets for each effect
+      - Dark/cream alternating backgrounds
+      - All styling from design tokens
+
+error_handling:
+  on_validation_error: "Design tokens and brand config required."
+  retry_count: 1

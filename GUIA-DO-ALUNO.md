@@ -49,12 +49,13 @@ Execute `/briefing-manha` e depois `/sessao`. Abra `saidas/RETOMAR.md` e confirm
 
 1. conectar o projeto Lovable ao GitHub e registrar o clone;
 2. importar uma reunião real do Fathom;
-3. escolher uma conexão adicional em `guias/conexoes/` ou pesquisar outra com `/search-connectors`;
+3. executar `/mapear-fontes` para priorizar as próximas fontes do trabalho;
+4. escolher uma conexão adicional em `guias/conexoes/` ou pesquisar outra com `/search-connectors`;
    comece pelo [catálogo de conexões](guias/conexoes/README.md) e teste somente uma fonte por vez;
-4. depois de alguns dias, executar `/fechar-semana`;
-5. executar `/montar-semana` e conferir se o plano cabe na agenda;
-6. criar outra rotina com `/criar-rotina` e executá-la manualmente;
-7. nunca automatizar envio antes de validar a saída.
+5. depois de alguns dias, executar `/fechar-semana`;
+6. executar `/montar-semana` e conferir se o plano cabe na agenda;
+7. criar outra rotina com `/criar-rotina` e executá-la manualmente;
+8. nunca automatizar envio antes de validar a saída.
 
 Para continuar a construção em etapas, siga [GUIA-COMPLETO-DO-OS.md](GUIA-COMPLETO-DO-OS.md). O mesmo conteúdo está em PDF para ser enviado a uma IA e usado como playbook guiado.
 

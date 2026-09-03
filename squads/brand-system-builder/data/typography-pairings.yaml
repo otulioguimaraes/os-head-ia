@@ -1,0 +1,155 @@
+typography_pairings:
+  bold_impact:
+    description: "High impact, provocative brands"
+    heading:
+      options:
+        - name: "Inter"
+          weight: "800-900"
+          style: "Clean geometric with heavy impact"
+        - name: "Clash Display"
+          weight: "600-700"
+          style: "Modern display with character"
+        - name: "Space Grotesk"
+          weight: "700"
+          style: "Tech-forward geometric"
+        - name: "Satoshi"
+          weight: "700-900"
+          style: "Modern geometric, very clean"
+    body:
+      options:
+        - name: "Inter"
+          weight: "400-500"
+          style: "Excellent readability at all sizes"
+        - name: "DM Sans"
+          weight: "400-500"
+          style: "Geometric, friendly, readable"
+    mono:
+      options:
+        - name: "JetBrains Mono"
+          style: "Developer-friendly, ligatures"
+        - name: "Fira Code"
+          style: "Popular, great ligatures"
+
+  elegant_luxury:
+    description: "Premium, sophisticated brands"
+    heading:
+      options:
+        - name: "Playfair Display"
+          weight: "700"
+          style: "Classic serif elegance"
+        - name: "Cormorant Garamond"
+          weight: "600-700"
+          style: "Refined, editorial"
+        - name: "Fraunces"
+          weight: "700"
+          style: "Modern serif with personality"
+    body:
+      options:
+        - name: "Lora"
+          weight: "400"
+          style: "Elegant serif for reading"
+        - name: "Source Sans 3"
+          weight: "400"
+          style: "Clean sans for contrast with serif heading"
+    mono:
+      options:
+        - name: "IBM Plex Mono"
+          style: "Professional, clean"
+
+  tech_modern:
+    description: "Tech startups, SaaS, developer brands"
+    heading:
+      options:
+        - name: "Geist"
+          weight: "600-700"
+          style: "Vercel's font, ultra-modern"
+        - name: "Plus Jakarta Sans"
+          weight: "700-800"
+          style: "Modern geometric, great for tech"
+        - name: "Manrope"
+          weight: "700-800"
+          style: "Semi-rounded, tech-friendly"
+    body:
+      options:
+        - name: "Geist"
+          weight: "400"
+          style: "Consistent with heading"
+        - name: "Inter"
+          weight: "400"
+          style: "Industry standard readability"
+    mono:
+      options:
+        - name: "Geist Mono"
+          style: "Matches Geist family"
+        - name: "JetBrains Mono"
+          style: "Developer standard"
+
+  friendly_accessible:
+    description: "Educational, inclusive, approachable brands"
+    heading:
+      options:
+        - name: "Nunito"
+          weight: "700-800"
+          style: "Rounded, friendly, warm"
+        - name: "Poppins"
+          weight: "600-700"
+          style: "Geometric, clean, friendly"
+        - name: "Quicksand"
+          weight: "700"
+          style: "Rounded, approachable"
+    body:
+      options:
+        - name: "Nunito Sans"
+          weight: "400"
+          style: "Pairs with Nunito heading"
+        - name: "Open Sans"
+          weight: "400"
+          style: "Universal readability"
+    mono:
+      options:
+        - name: "Source Code Pro"
+          style: "Readable, approachable"
+
+  creative_expressive:
+    description: "Creative agencies, artists, designers"
+    heading:
+      options:
+        - name: "Cabinet Grotesk"
+          weight: "800"
+          style: "Bold, characterful"
+        - name: "General Sans"
+          weight: "600-700"
+          style: "Modern, versatile"
+        - name: "Syne"
+          weight: "700-800"
+          style: "Distinctive, artistic"
+    body:
+      options:
+        - name: "General Sans"
+          weight: "400"
+          style: "Clean, modern"
+        - name: "Outfit"
+          weight: "400"
+          style: "Geometric, clean"
+    mono:
+      options:
+        - name: "Space Mono"
+          style: "Quirky, characterful"
+
+scale_recommendations:
+  major_third:
+    ratio: 1.25
+    sizes: [12, 14, 16, 20, 25, 31, 39, 49]
+    best_for: "Compact, information-dense layouts"
+  perfect_fourth:
+    ratio: 1.333
+    sizes: [12, 14, 16, 21, 28, 38, 50, 67]
+    best_for: "General purpose, balanced hierarchy"
+  augmented_fourth:
+    ratio: 1.414
+    sizes: [12, 14, 16, 23, 32, 45, 64, 90]
+    best_for: "Bold, impactful layouts"
+  golden_ratio:
+    ratio: 1.618
+    sizes: [12, 14, 16, 26, 42, 68, 110]
+    best_for: "Maximum impact, editorial layouts"

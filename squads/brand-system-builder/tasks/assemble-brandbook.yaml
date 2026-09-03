@@ -1,0 +1,89 @@
+name: assemble-brandbook
+version: 1.0.0
+description: "Compile all phase outputs into organized brandbook folder structure with table of contents and master README."
+agent: brand-assembler
+
+metadata:
+  elicit: false
+  phase: 5
+  order: 1
+
+inputs:
+  - name: strategy_docs
+    type: directory
+    required: true
+    path: "brand-output/docs/01-strategy/"
+  - name: identity_docs
+    type: directory
+    required: true
+    path: "brand-output/docs/02-identity/"
+  - name: foundation_docs
+    type: directory
+    required: true
+    path: "brand-output/docs/03-foundations/"
+  - name: component_docs
+    type: directory
+    required: true
+    path: "brand-output/docs/04-components/"
+  - name: tokens
+    type: directory
+    required: true
+    path: "brand-output/tokens/"
+
+outputs:
+  - name: brandbook_readme
+    type: file
+    format: markdown
+    path: "brand-output/docs/README.md"
+  - name: delivery_readme
+    type: file
+    format: markdown
+    path: "brand-output/docs/05-delivery/README.md"
+
+steps:
+  - id: verify-completeness
+    action: check-all-outputs
+    description: |
+      Verify all phase outputs exist:
+      Phase 1: positioning.md, archetype.md, manifesto.md, brand-voice.md, moodboard.md
+      Phase 2: color-palette.md, typography.md, logo-system.md, guidelines.md
+      Phase 3: spacing.md, grid.md, shadows.md, motion.md
+      Phase 4: component docs (12 categories) + audit-report.md
+      Tokens: colors.json, typography.json, spacing.json, shadows.json, motion.json, tokens.css
+
+      Report any missing files.
+
+  - id: generate-toc
+    action: create-table-of-contents
+    depends_on: [verify-completeness]
+    description: |
+      Generate master README.md with:
+      - Brand name and tagline
+      - Table of contents with links to all docs
+      - Quick stats (number of components, tokens, etc.)
+      - How to use this brandbook
+      - Phase overview with status
+
+  - id: create-delivery-folder
+    action: setup-delivery
+    depends_on: [generate-toc]
+    description: |
+      Create 05-delivery/ folder with:
+      - README.md explaining delivery formats
+      - Links to preview/ and site/
+      - Asset export instructions
+      - Token usage guide for developers
+
+  - id: cross-reference
+    action: add-cross-references
+    depends_on: [generate-toc]
+    description: |
+      Add cross-references between documents:
+      - Colors referenced in component docs link to color-palette.md
+      - Typography references link to typography.md
+      - Token names link to tokens/ files
+      - Navigation breadcrumbs in each doc
+
+error_handling:
+  on_validation_error: "Missing phase outputs. Ensure Phases 1-4 are complete."
+  retry_count: 1

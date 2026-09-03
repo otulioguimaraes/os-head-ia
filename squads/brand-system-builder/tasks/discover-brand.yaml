@@ -1,0 +1,104 @@
+name: discover-brand
+version: 1.0.0
+description: "Full brand discovery through guided elicitation. Collects name, area, audience, personality, channels, and references to produce positioning document."
+agent: brand-strategist
+
+metadata:
+  elicit: true
+  phase: 1
+  order: 1
+
+inputs:
+  - name: brand_name
+    type: string
+    required: true
+    description: "Name of the brand or person"
+  - name: area
+    type: string
+    required: true
+    description: "Primary area of activity (tech, marketing, design, business, etc.)"
+  - name: audience
+    type: string
+    required: true
+    description: "Target audience description"
+  - name: personality
+    type: choice
+    required: true
+    description: "Brand personality/vibe"
+    options:
+      - "Authoritative & Serious"
+      - "Tech Cool & Modern"
+      - "Accessible & Didactic"
+      - "Provocative & Bold"
+  - name: channels
+    type: multiselect
+    required: true
+    description: "Primary channels for brand presence"
+    options:
+      - "Instagram / TikTok"
+      - "LinkedIn / Twitter(X)"
+      - "YouTube / Podcast"
+      - "Website / Blog"
+      - "All channels"
+  - name: color_preference
+    type: string
+    required: false
+    description: "Preferred color direction (optional)"
+  - name: references
+    type: string
+    required: false
+    description: "Visual or brand references (URLs, names, descriptions)"
+  - name: tagline
+    type: string
+    required: false
+    description: "Existing tagline if any"
+
+outputs:
+  - name: positioning
+    type: file
+    format: markdown
+    path: "brand-output/docs/01-strategy/positioning.md"
+    description: "Brand positioning document"
+
+steps:
+  - id: elicit-basics
+    action: guided-questionnaire
+    description: |
+      Ask the following questions ONE AT A TIME:
+      1. What is the brand/person name?
+      2. What is your primary area of activity?
+      3. Who is your target audience?
+      4. What personality/vibe do you want? (present 4 options)
+      5. Which channels will you use? (present options)
+      6. Do you have color preferences? (optional)
+      7. Any brand references or inspirations? (optional)
+      8. Do you have an existing tagline? (optional)
+
+  - id: analyze-inputs
+    action: synthesize-positioning
+    depends_on: [elicit-basics]
+    description: |
+      From collected inputs, synthesize:
+      - Brand overview (who, what, for whom)
+      - Value proposition (unique differentiator)
+      - Market positioning (where in the landscape)
+      - Key messages (3-5 core messages)
+      - Competitive advantages
+
+  - id: generate-positioning
+    action: write-document
+    depends_on: [analyze-inputs]
+    description: |
+      Generate positioning.md using positioning-tmpl.md template.
+      Sections: Overview, Target Audience, Value Proposition,
+      Differentiators, Key Messages, Competitive Position.
+
+  - id: review-output
+    action: present-for-review
+    depends_on: [generate-positioning]
+    description: "Present positioning document to user for review and approval"
+
+error_handling:
+  on_validation_error: "Missing required brand information. Please provide: {{missing_fields}}"
+  on_process_error: "Could not generate positioning: {{error.message}}"
+  retry_count: 1

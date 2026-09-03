@@ -1,0 +1,35 @@
+name: "brand-system-builder"
+version: 0.1.0
+description: "Creates complete brandbooks and design systems from brand strategy to interactive delivery. Covers identity, visual foundations, component library, and multi-format output."
+author: "Acelera IA"
+license: MIT
+
+aiox:
+  minVersion: "2.1.0"
+  type: squad
+
+components:
+  agents:
+    - agents/*.yaml
+  tasks:
+    - tasks/*.yaml
+  workflows:
+    - workflows/*.yaml
+  templates:
+    - templates/*.md
+  checklists:
+    - checklists/*.md
+  data:
+    - data/*.yaml
+
+dependencies: []
+
+keywords:
+  - aiox
+  - squad
+  - brandbook
+  - design-system
+  - brand-identity
+  - design-tokens
+  - component-library
+  - personal-brand

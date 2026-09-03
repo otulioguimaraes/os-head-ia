@@ -20,8 +20,8 @@ foreach ($File in $RequiredFiles) {
 }
 
 $SkillCount = (Get-ChildItem -Path (Join-Path $OsRoot "skills\os") -Filter "SKILL.md" -File -Recurse -ErrorAction SilentlyContinue).Count
-if ($SkillCount -eq 11) { Write-Ok "11 skills canonicas encontradas" }
-else { Write-Failure "esperava 11 skills; encontrei $SkillCount" }
+if ($SkillCount -eq 13) { Write-Ok "13 skills canonicas encontradas" }
+else { Write-Failure "esperava 13 skills; encontrei $SkillCount" }
 
 function Get-SkillManifest($Root) {
     if (-not (Test-Path $Root -PathType Container)) { return @() }
@@ -33,14 +33,14 @@ function Get-SkillManifest($Root) {
 
 function Test-InstalledSkills($Label, $TargetRoot) {
     $Count = (Get-ChildItem -Path $TargetRoot -Filter "SKILL.md" -File -Recurse -ErrorAction SilentlyContinue).Count
-    if ($Count -ne 11) {
-        Write-Failure "$Label`: esperava 11 skills instaladas; encontrei $Count. Rode skills\sync-skills.ps1"
+    if ($Count -ne 13) {
+        Write-Failure "$Label`: esperava 13 skills instaladas; encontrei $Count. Rode skills\sync-skills.ps1"
         return
     }
     $Canonical = Get-SkillManifest (Join-Path $OsRoot "skills\os")
     $Installed = Get-SkillManifest $TargetRoot
     if ((Compare-Object -ReferenceObject $Canonical -DifferenceObject $Installed).Count -eq 0) {
-        Write-Ok "$Label`: 11 skills instaladas e sincronizadas"
+        Write-Ok "$Label`: 13 skills instaladas e sincronizadas"
     } else {
         Write-Failure "$Label`: skills instaladas estao desatualizadas. Rode skills\sync-skills.ps1"
     }
@@ -48,6 +48,10 @@ function Test-InstalledSkills($Label, $TargetRoot) {
 
 Test-InstalledSkills "Codex" (Join-Path $OsRoot ".agents\skills")
 Test-InstalledSkills "Claude Code" (Join-Path $OsRoot ".claude\skills")
+
+$BrandSystemWorkflow = Join-Path $OsRoot "squads\brand-system-builder\workflows\brand-system-pipeline.yaml"
+if (Test-Path $BrandSystemWorkflow -PathType Leaf) { Write-Ok "squad Brand System Builder disponivel" }
+else { Write-Failure "squad Brand System Builder ausente" }
 
 if (Get-Command git -ErrorAction SilentlyContinue) { Write-Ok "Git disponivel" }
 else { Write-WarningResult "Git nao encontrado; git clone nao estara disponivel" }

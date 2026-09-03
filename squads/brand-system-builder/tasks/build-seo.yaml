@@ -1,0 +1,120 @@
+name: build-seo
+version: 1.0.0
+description: "Generate SEO guidelines, meta tag templates, Open Graph configuration, JSON-LD schemas, and favicon specifications."
+agent: brand-assembler
+
+metadata:
+  elicit: false
+  phase: 6
+  order: 3
+
+inputs:
+  - name: brand_config
+    type: file
+    required: true
+    path: "brand-config.yaml"
+  - name: tokens_css
+    type: file
+    required: true
+    path: "brand-output/tokens/tokens.css"
+
+outputs:
+  - name: seo_html
+    type: file
+    format: html
+    path: "brand-output/preview/seo.html"
+  - name: seo_doc
+    type: file
+    format: markdown
+    path: "brand-output/docs/05-delivery/seo.md"
+
+steps:
+  - id: read-brand-config
+    action: load-config
+    description: |
+      Read brand-config.yaml for:
+      - Brand name, description, tagline for meta tags
+      - SEO config (title, description, keywords, domain)
+      - Social handles for Twitter cards
+      - Colors for theme-color meta
+      - Logo for OG image reference
+
+  - id: build-meta-tags
+    action: create-seo-section
+    depends_on: [read-brand-config]
+    description: |
+      Generate meta tag templates:
+      - Standard meta (title, description, keywords, author)
+      - Viewport and charset
+      - Theme-color (brand primary)
+      - Robots and canonical
+      - Language and locale
+
+  - id: build-og-tags
+    action: create-seo-section
+    depends_on: [read-brand-config]
+    description: |
+      Generate Open Graph tags:
+      - og:title, og:description, og:image
+      - og:url, og:type, og:site_name
+      - og:locale
+      - Image size recommendations (1200x630)
+
+  - id: build-twitter-cards
+    action: create-seo-section
+    depends_on: [read-brand-config]
+    description: |
+      Generate Twitter Card tags:
+      - twitter:card (summary_large_image)
+      - twitter:site, twitter:creator
+      - twitter:title, twitter:description
+      - twitter:image
+
+  - id: build-json-ld
+    action: create-seo-section
+    depends_on: [read-brand-config]
+    description: |
+      Generate JSON-LD structured data:
+      - Organization schema
+      - Person schema (for personal brands)
+      - WebSite schema with search
+      - BreadcrumbList schema
+      - Article schema template
+
+  - id: build-favicon-spec
+    action: create-seo-section
+    depends_on: [read-brand-config]
+    description: |
+      Generate favicon specification:
+      - Required sizes (16x16, 32x32, 180x180, 192x192, 512x512)
+      - manifest.json template
+      - Apple touch icon
+      - SVG favicon
+      - Brand color for msapplication-TileColor
+
+  - id: build-seo-checklist
+    action: create-seo-section
+    depends_on: [read-brand-config]
+    description: |
+      Generate SEO launch checklist:
+      - Technical SEO items
+      - Content SEO items
+      - Social media preview verification
+      - Performance checks (Core Web Vitals)
+      - Accessibility overlap items
+
+  - id: assemble-seo-page
+    action: compile-html
+    depends_on: [build-meta-tags, build-og-tags, build-twitter-cards, build-json-ld, build-favicon-spec, build-seo-checklist]
+    description: |
+      Compile all SEO content into seo.html:
+      - Navigation header with brand logo
+      - Each SEO topic in its own section
+      - Code snippets with copy buttons
+      - Preview mockups (Google result, social cards)
+      - Checklist section
+      - All styling from design tokens
+
+error_handling:
+  on_validation_error: "Brand config required for SEO generation."
+  retry_count: 1

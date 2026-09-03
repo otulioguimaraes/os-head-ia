@@ -1,0 +1,89 @@
+name: generate-tokens
+version: 1.0.0
+description: "Extract design values from visual identity and output as JSON tokens and CSS custom properties."
+agent: visual-designer
+
+metadata:
+  elicit: false
+  phase: 2
+  order: 2
+
+inputs:
+  - name: color_palette
+    type: file
+    required: true
+    path: "brand-output/docs/02-identity/color-palette.md"
+  - name: typography
+    type: file
+    required: true
+    path: "brand-output/docs/02-identity/typography.md"
+
+outputs:
+  - name: color_tokens
+    type: file
+    format: json
+    path: "brand-output/tokens/colors.json"
+  - name: typography_tokens
+    type: file
+    format: json
+    path: "brand-output/tokens/typography.json"
+  - name: css_tokens
+    type: file
+    format: css
+    path: "brand-output/tokens/tokens.css"
+
+steps:
+  - id: extract-colors
+    action: parse-color-values
+    description: |
+      Extract all color values from color-palette.md:
+      - Map to semantic token names (--color-primary, --color-bg-surface, etc.)
+      - Generate colors.json with structured format:
+        { "primary": { "50": "#...", "100": "#...", ... "900": "#..." }, ... }
+      - Include dark and light mode variants
+
+  - id: extract-typography
+    action: parse-type-values
+    description: |
+      Extract typography values from typography.md:
+      - Font families, sizes, weights, line-heights, letter-spacing
+      - Generate typography.json with structured format:
+        { "fontFamily": { "heading": "...", "body": "..." }, "fontSize": { ... } }
+
+  - id: generate-css
+    action: compile-css-tokens
+    depends_on: [extract-colors, extract-typography]
+    description: |
+      Generate tokens.css with CSS custom properties:
+      ```css
+      :root {
+        /* Colors */
+        --color-primary: #...;
+        --color-primary-light: #...;
+        /* Typography */
+        --font-heading: '...';
+        --font-body: '...';
+        --font-size-h1: ...;
+        /* etc. */
+      }
+
+      [data-theme="dark"] {
+        --color-bg: #...;
+        --color-text: #...;
+        /* dark overrides */
+      }
+      ```
+
+  - id: validate-tokens
+    action: verify-token-coverage
+    depends_on: [generate-css]
+    description: |
+      Verify all design values are tokenized:
+      - No orphan values in docs without tokens
+      - All tokens have both dark and light values
+      - CSS custom properties match JSON structure
+      - Token naming follows convention
+
+error_handling:
+  on_validation_error: "Color palette and typography documents required."
+  retry_count: 1

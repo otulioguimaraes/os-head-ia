@@ -20,4 +20,4 @@ Os scripts geram cópias em `.agents/skills/` e `.claude/skills/`. Elas acompanh
 
 Mesmo sem sincronizar, o agente deve seguir `AGENTS.md` ou `CLAUDE.md` e abrir a skill canônica quando você escrever um comando.
 
-O pacote do aluno contém onze skills. O onboarding apresenta primeiro as capacidades essenciais; `/search-connectors`, `/fechar-semana` e `/montar-semana` aparecem depois da primeira ativação. Recursos usados somente pelo professor e pela operação da aula ficam fora deste pacote.
+O pacote do aluno contém treze skills. O onboarding apresenta primeiro as capacidades essenciais; `/mapear-fontes`, `/search-connectors`, `/design-system`, `/fechar-semana` e `/montar-semana` aparecem depois da primeira ativação. Recursos usados somente pelo professor e pela operação da aula ficam fora deste pacote.

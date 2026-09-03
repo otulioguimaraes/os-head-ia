@@ -1,0 +1,108 @@
+name: build-site
+version: 1.0.0
+description: "Build interactive brandbook site with navigation, live component demos, and brand identity showcase based on the approved project system."
+agent: brand-assembler
+
+metadata:
+  elicit: true
+  phase: 5
+  order: 3
+
+inputs:
+  - name: brandbook_docs
+    type: directory
+    required: true
+    path: "brand-output/docs/"
+  - name: tokens
+    type: directory
+    required: true
+    path: "brand-output/tokens/"
+  - name: component_html
+    type: directory
+    required: true
+    path: "brand-output/components/"
+  - name: preview_html
+    type: file
+    required: true
+    path: "brand-output/preview/index.html"
+
+outputs:
+  - name: site_index
+    type: file
+    format: html
+    path: "brand-output/site/index.html"
+  - name: site_css
+    type: file
+    format: css
+    path: "brand-output/site/styles.css"
+  - name: site_js
+    type: file
+    format: javascript
+    path: "brand-output/site/script.js"
+
+steps:
+  - id: design-site-structure
+    action: plan-site-architecture
+    description: |
+      Plan the site structure from the approved preview and project decisions:
+      - Hero section with brand identity
+      - System overview (stats, pillar cards)
+      - Brand identity section (strategy, logo, moodboard)
+      - Design foundations section (tokens, colors, typography)
+      - Component library section (interactive demos)
+      - FAQ section
+      - Footer with brand info and links
+
+  - id: build-html
+    action: generate-site-html
+    depends_on: [design-site-structure]
+    description: |
+      Generate index.html with:
+      - Semantic HTML5 structure
+      - Sections for each brandbook chapter
+      - Component demo areas with live examples
+      - Navigation (top bar + scroll spy)
+      - Responsive layout
+      - Meta tags for SEO and social sharing
+
+  - id: build-css
+    action: generate-site-css
+    depends_on: [design-site-structure]
+    description: |
+      Generate styles.css that:
+      - Imports/includes design tokens
+      - Styles the site using its own brand tokens (dogfooding)
+      - Dark mode native (data-theme attribute)
+      - Responsive breakpoints from grid tokens
+      - Smooth scrolling and transitions from motion tokens
+      - Component demo styling
+
+  - id: build-js
+    action: generate-site-js
+    depends_on: [design-site-structure]
+    description: |
+      Generate script.js with:
+      - Dark/light theme toggle with persistence
+      - Smooth scroll navigation
+      - Scroll spy for active section highlighting
+      - Component demo interactivity (tabs, accordions)
+      - Copy-to-clipboard for token values
+      - Mobile menu toggle
+      - Intersection Observer for scroll animations
+
+  - id: validate-site
+    action: verify-site-quality
+    depends_on: [build-html, build-css, build-js]
+    description: |
+      Verify site quality:
+      - All sections render correctly
+      - Navigation works (scroll + active state)
+      - Dark/light toggle works
+      - Components are interactive
+      - Responsive on mobile/tablet/desktop
+      - No console errors
+      - All tokens applied correctly
+
+error_handling:
+  on_validation_error: "All brandbook outputs required. Ensure Phases 1-4 and assembly are complete."
+  retry_count: 1

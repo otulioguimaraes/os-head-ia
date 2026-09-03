@@ -1,0 +1,319 @@
+workflow:
+  id: brand-system-pipeline
+  name: Brand System Builder Pipeline
+  version: "1.0"
+  description: >-
+    End-to-end pipeline that creates a complete brandbook and design system.
+    From brand discovery and strategy through visual identity, design foundations,
+    component library, to final assembly and multi-format delivery.
+  type: greenfield
+  project_types:
+    - brandbook
+    - design-system
+    - personal-brand
+    - corporate-brand
+
+  config:
+    brand_config: "brand-config.yaml"
+    description: "Central brand configuration. All tasks read from this file."
+
+  metadata:
+    elicit: true
+    confirmation_required: true
+
+  execution_modes:
+    - mode: interactive
+      description: "Guided mode with user checkpoints between phases"
+      prompts: 10-20
+      default: true
+    - mode: yolo
+      description: "Autonomous execution with minimal interaction"
+      prompts: 2-5
+
+  phases:
+    - phase_1: "Discovery & Strategy"
+    - phase_2: "Visual Identity"
+    - phase_3: "Design Foundations"
+    - phase_4: "Component Library"
+    - phase_5: "Marketing Sections & Effects"
+    - phase_6: "Templates, VFX & SEO"
+    - phase_7: "Assembly & Delivery"
+
+  sequence:
+    # ── Phase 1: Discovery & Strategy ──
+    - id: discover
+      phase: 1
+      agent: brand-strategist
+      task: discover-brand
+      creates: [positioning.md]
+      notes: |
+        Guided elicitation to collect brand inputs.
+        Outputs positioning document with value proposition and market position.
+
+    - id: archetype
+      phase: 1
+      agent: brand-strategist
+      task: define-archetype
+      requires: [discover]
+      creates: [archetype.md]
+      notes: |
+        Present 12 Jung archetypes, user selects primary + secondary.
+        Generates archetype profile with personality map.
+
+    - id: manifesto
+      phase: 1
+      agent: brand-strategist
+      task: write-manifesto
+      requires: [archetype]
+      creates: [manifesto.md, brand-voice.md, moodboard.md]
+      notes: |
+        Generates manifesto in brand voice, voice guidelines, and textual moodboard.
+        PHASE GATE: Review all Phase 1 outputs before proceeding.
+
+    # ── Phase 2: Visual Identity ──
+    - id: identity
+      phase: 2
+      agent: visual-designer
+      task: design-identity
+      requires: [manifesto]
+      creates: [color-palette.md, typography.md, logo-system.md, guidelines.md]
+      notes: |
+        Creates visual identity based on strategy outputs.
+        Color palette requires user approval before proceeding.
+
+    - id: tokens
+      phase: 2
+      agent: visual-designer
+      task: generate-tokens
+      requires: [identity]
+      creates: [colors.json, typography.json, tokens.css]
+      notes: |
+        Extracts all design values into JSON tokens and CSS custom properties.
+        PHASE GATE: Verify token coverage before proceeding.
+
+    # ── Phase 3: Design Foundations ──
+    - id: foundations
+      phase: 3
+      agent: visual-designer
+      task: build-foundations
+      requires: [tokens]
+      creates: [spacing.json, shadows.json, motion.json]
+      notes: |
+        Creates spacing, grid, shadow, border, and motion systems.
+        Updates tokens.css with all foundation tokens.
+        PHASE GATE: All tokens consolidated before component building.
+
+    # ── Phase 4: Component Library ──
+    - id: components
+      phase: 4
+      agent: component-builder
+      task: build-components
+      requires: [foundations]
+      creates: [component-docs/, component-html/]
+      notes: |
+        Builds 60+ components across 12 categories.
+        All styling from design tokens. Theme follows the approved brand direction. WCAG AA.
+
+    - id: audit
+      phase: 4
+      agent: component-builder
+      task: audit-components
+      requires: [components]
+      creates: [audit-report.md]
+      notes: |
+        Audits token usage, accessibility, responsiveness, dark mode.
+        PHASE GATE: Must pass audit before assembly.
+
+    # ── Phase 5: Marketing Sections & Effects ──
+    - id: sections
+      phase: 5
+      agent: component-builder
+      task: build-sections
+      requires: [audit]
+      creates: [brand-output/preview/sections.html]
+      notes: |
+        Builds 10+ pre-built marketing sections (Hero, Stats, Services, Pricing, FAQ, CTA, etc.).
+
+    - id: effects
+      phase: 5
+      agent: visual-designer
+      task: build-effects
+      requires: [audit]
+      creates: [brand-output/preview/effects.html]
+      notes: |
+        Creates visual effects library (ticker, badges, glow, hover, pulse, gradients, text effects).
+
+    # ── Phase 6: Templates, VFX & SEO ──
+    - id: templates
+      phase: 6
+      agent: component-builder
+      task: build-templates
+      requires: [sections]
+      creates: [brand-output/preview/templates.html]
+      notes: |
+        Page layout templates (shell, bento grid, auto-fit, sidebar, split, masonry).
+
+    - id: vfx
+      phase: 6
+      agent: visual-designer
+      task: build-vfx
+      requires: [effects]
+      creates: [brand-output/preview/vfx.html]
+      notes: |
+        Post-processing VFX system (grain, blend modes, blur, glow, overlays, composites).
+
+    - id: seo
+      phase: 6
+      agent: brand-assembler
+      task: build-seo
+      requires: [sections]
+      creates: [brand-output/preview/seo.html]
+      notes: |
+        SEO guidelines (meta tags, OG, Twitter cards, JSON-LD, favicons, checklist).
+
+    # ── Phase 7: Assembly & Delivery ──
+    - id: assemble
+      phase: 7
+      agent: brand-assembler
+      task: assemble-brandbook
+      requires: [templates, vfx, seo]
+      creates: [brand-output/docs/]
+      notes: |
+        Compiles all outputs into organized folder structure.
+        Generates master README and table of contents.
+
+    - id: preview
+      phase: 7
+      agent: brand-assembler
+      task: build-preview
+      requires: [assemble]
+      creates: [brand-output/preview/index.html]
+      notes: |
+        Single-file HTML with all components and tokens embedded.
+        User validates visual output before final site.
+
+    - id: site
+      phase: 7
+      agent: brand-assembler
+      task: build-site
+      requires: [preview]
+      creates: [brand-output/site/]
+      notes: |
+        Interactive brandbook site with navigation, live demos.
+        Reference: the approved preview and design decisions for this project.
+
+    - workflow_end:
+      action: pipeline_complete
+      notes: |
+        Brand System Builder pipeline complete!
+
+        Deliverables:
+        1. Markdown brandbook (brand-output/docs/)
+        2. Design tokens (brand-output/tokens/)
+        3. HTML preview (brand-output/preview/)
+        4. Interactive site (brand-output/site/)
+
+  flow_diagram: |
+    ```mermaid
+    graph TD
+        A[Start] --> B[brand-strategist: Discover Brand]
+        B --> C[brand-strategist: Define Archetype]
+        C --> D[brand-strategist: Write Manifesto]
+        D --> E{Phase 1 Gate}
+        E -->|Approved| F[visual-designer: Design Identity]
+        E -->|Revise| B
+        F --> G[visual-designer: Generate Tokens]
+        G --> H{Phase 2 Gate}
+        H -->|Approved| I[visual-designer: Build Foundations]
+        H -->|Revise| F
+        I --> J{Phase 3 Gate}
+        J -->|Approved| K[component-builder: Build Components]
+        J -->|Revise| I
+        K --> L[component-builder: Audit Components]
+        L --> M{Phase 4 Gate}
+        M -->|Pass| N1[build-sections]
+        M -->|Pass| N2[build-effects]
+        M -->|Fail| K
+        N1 --> O1[build-templates]
+        N1 --> O3[build-seo]
+        N2 --> O2[build-vfx]
+        O1 --> P[brand-assembler: Assemble]
+        O2 --> P
+        O3 --> P
+        P --> Q[brand-assembler: Build Preview]
+        Q --> R{Preview OK?}
+        R -->|Yes| S[brand-assembler: Build Site]
+        R -->|No| P
+        S --> T[Pipeline Complete]
+
+        style T fill:#90EE90
+        style B fill:#E6E6FA
+        style C fill:#E6E6FA
+        style D fill:#E6E6FA
+        style F fill:#FFD700
+        style G fill:#FFD700
+        style I fill:#FFD700
+        style K fill:#FF6B6B
+        style L fill:#FF6B6B
+        style N1 fill:#FFA07A
+        style N2 fill:#FFA07A
+        style O1 fill:#DDA0DD
+        style O2 fill:#DDA0DD
+        style O3 fill:#DDA0DD
+        style P fill:#87CEEB
+        style Q fill:#87CEEB
+        style S fill:#87CEEB
+    ```
+
+  decision_guidance:
+    when_to_use:
+      - Creating a new brand from scratch
+      - Building a personal brand identity
+      - Creating a corporate design system
+      - Rebranding with full design system
+      - Building a brandbook for a product
+
+  handoff_prompts:
+    phase_1_complete: |
+      Phase 1 (Discovery & Strategy) complete.
+      Documents created: positioning.md, archetype.md, manifesto.md, brand-voice.md, moodboard.md
+      Review these documents and approve to proceed to Visual Identity.
+
+    phase_2_complete: |
+      Phase 2 (Visual Identity) complete.
+      Documents: color-palette.md, typography.md, logo-system.md, guidelines.md
+      Tokens: colors.json, typography.json, tokens.css
+      Review colors and typography. Approve to proceed to Foundations.
+
+    phase_3_complete: |
+      Phase 3 (Design Foundations) complete.
+      Tokens: spacing.json, shadows.json, motion.json
+      Updated: tokens.css (consolidated)
+      All design tokens ready. Approve to proceed to Component Library.
+
+    phase_4_complete: |
+      Phase 4 (Component Library) complete.
+      Components built: 60+ across 12 categories
+      Audit report: audit-report.md
+      Review audit results. Approve to proceed to Assembly.
+
+    pipeline_complete: |
+      Brand System Builder pipeline complete!
+
+      Deliverables ready:
+      1. Markdown brandbook: brand-output/docs/
+      2. Design tokens: brand-output/tokens/
+      3. HTML preview: brand-output/preview/index.html
+      4. Interactive site: brand-output/site/index.html
+
+metadata:
+  author: "brand-system-builder squad"
+  created_date: "2026-03-07"
+  version: 1.0.0
+  tags:
+    - brandbook
+    - design-system
+    - brand-identity
+    - design-tokens
+    - component-library
+    - greenfield

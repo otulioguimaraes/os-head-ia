@@ -1,15 +1,21 @@
 # Versão do OS Head de IA
 
-- versão: `0.4.0`
-- data: `2026-09-02`
+- versão: `0.5.0`
+- data: `2026-09-03`
 - estágio: piloto da Formação Head de IA
 
 ## Mudanças desta versão
 
+- nova skill `/mapear-fontes`, com entrevista não técnica, separação pessoal/profissional, priorização e primeiro teste seguro;
+- onboarding agora recomenda o mapa de fontes depois da primeira vitória, antes de ampliar conexões;
+- nova skill `/design-system`, com roteamento entre extração de marca existente e criação/rebranding;
+- squad completo `brand-system-builder` incorporado com quatro papéis, dezesseis tarefas, pipeline de sete fases, templates, scripts e checklists;
+- execução do squad adaptada ao OS: não exige runtime específico, não instala dependências e não usa API paga sem aprovação;
+- pacote do aluno ampliado para treze skills sincronizadas;
+
 - novo guia completo do OS em Markdown e PDF, utilizável como playbook por uma IA;
 - novos guias para segundo cérebro visual e construção segura de um Agentic OS;
 - nova skill `/search-connectors`, adaptada ao contrato de documentação oficial, permissão mínima e leitura pequena;
-- pacote do aluno ampliado para onze skills sincronizadas;
 - catálogo de conexões criado com rotas por objetivo, maturidade e fallback;
 - novos playbooks oficiais para Codex/Claude, Slack, Fireflies, Granola, tl;dv, Plaud, Notion, Obsidian, Telegram e Discord;
 - `/conectar` agora roteia cada fonte para o menor caminho oficial e não inventa endpoints ou instalações;
@@ -27,4 +33,4 @@
 - ativação didática completa usa o estado explícito `onboarding: concluído com DEMO`;
 - `/iniciar` aceita M0 (contexto do negócio) e M2 (DNA) como entradas fundacionais opcionais;
 - `/sessao` relê conversa e arquivos alterados para preservar inteligência operacional;
-- onze skills do aluno validadas e sincronizáveis para Codex e Claude Code;
+- treze skills do aluno validadas e sincronizáveis para Codex e Claude Code;

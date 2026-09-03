@@ -1,0 +1,118 @@
+name: build-foundations
+version: 1.0.0
+description: "Create design foundations: spacing system, grid, shadows, borders, and motion tokens."
+agent: visual-designer
+
+metadata:
+  elicit: false
+  phase: 3
+  order: 1
+
+inputs:
+  - name: color_tokens
+    type: file
+    required: true
+    path: "brand-output/tokens/colors.json"
+  - name: typography_tokens
+    type: file
+    required: true
+    path: "brand-output/tokens/typography.json"
+  - name: css_tokens
+    type: file
+    required: true
+    path: "brand-output/tokens/tokens.css"
+
+outputs:
+  - name: spacing_doc
+    type: file
+    format: markdown
+    path: "brand-output/docs/03-foundations/spacing.md"
+  - name: grid_doc
+    type: file
+    format: markdown
+    path: "brand-output/docs/03-foundations/grid.md"
+  - name: shadows_doc
+    type: file
+    format: markdown
+    path: "brand-output/docs/03-foundations/shadows.md"
+  - name: motion_doc
+    type: file
+    format: markdown
+    path: "brand-output/docs/03-foundations/motion.md"
+  - name: spacing_tokens
+    type: file
+    format: json
+    path: "brand-output/tokens/spacing.json"
+  - name: shadows_tokens
+    type: file
+    format: json
+    path: "brand-output/tokens/shadows.json"
+  - name: motion_tokens
+    type: file
+    format: json
+    path: "brand-output/tokens/motion.json"
+
+steps:
+  - id: create-spacing
+    action: define-spacing-system
+    description: |
+      Define spacing scale with 4px base unit:
+      - Scale: 0, 1(4px), 2(8px), 3(12px), 4(16px), 5(20px), 6(24px), 8(32px), 10(40px), 12(48px), 16(64px), 20(80px), 24(96px)
+      - Document usage guidelines (when to use each)
+      - Generate spacing.json and update tokens.css
+      - Tokens: --spacing-0 through --spacing-24
+
+  - id: create-grid
+    action: define-grid-system
+    description: |
+      Define responsive grid system:
+      - 12-column grid
+      - Breakpoints: sm(640px), md(768px), lg(1024px), xl(1280px), 2xl(1536px)
+      - Gutters: 16px mobile, 24px tablet, 32px desktop
+      - Max container widths per breakpoint
+      - Document layout patterns (full, sidebar, centered)
+
+  - id: create-shadows
+    action: define-shadow-system
+    description: |
+      Define elevation/shadow system:
+      - 5 levels: xs, sm, md, lg, xl
+      - Dark mode shadows (subtle, with colored tints)
+      - Light mode shadows (classic drop shadows)
+      - Generate shadows.json and update tokens.css
+      - Tokens: --shadow-xs through --shadow-xl
+
+  - id: create-borders
+    action: define-border-system
+    depends_on: [create-spacing]
+    description: |
+      Define border system:
+      - Border widths: 1px, 2px
+      - Border radius scale: sm(4px), md(8px), lg(12px), xl(16px), 2xl(24px), full(9999px)
+      - Border colors from color tokens
+      - Update tokens.css
+
+  - id: create-motion
+    action: define-motion-system
+    description: |
+      Define motion/animation tokens:
+      - Durations: fast(150ms), normal(300ms), slow(500ms), slower(700ms)
+      - Easings: ease-in, ease-out, ease-in-out, spring
+      - Transition properties (opacity, transform, colors)
+      - Generate motion.json and update tokens.css
+      - Tokens: --duration-fast, --easing-default, etc.
+
+  - id: update-master-css
+    action: consolidate-tokens
+    depends_on: [create-spacing, create-shadows, create-borders, create-motion]
+    description: |
+      Update tokens.css with all new tokens:
+      - Spacing custom properties
+      - Shadow custom properties
+      - Border radius custom properties
+      - Motion custom properties
+      - Ensure dark/light mode variants
+
+error_handling:
+  on_validation_error: "Phase 2 tokens required. Run generate-tokens first."
+  retry_count: 1

@@ -1,0 +1,87 @@
+name: build-preview
+version: 1.0.0
+description: "Generate single-file HTML page with all components rendered using live design tokens for quick validation."
+agent: brand-assembler
+
+metadata:
+  elicit: false
+  phase: 5
+  order: 2
+
+inputs:
+  - name: tokens_css
+    type: file
+    required: true
+    path: "brand-output/tokens/tokens.css"
+  - name: component_html
+    type: directory
+    required: true
+    path: "brand-output/components/"
+  - name: brandbook_docs
+    type: directory
+    required: true
+    path: "brand-output/docs/"
+
+outputs:
+  - name: preview_html
+    type: file
+    format: html
+    path: "brand-output/preview/index.html"
+
+steps:
+  - id: collect-components
+    action: gather-html-snippets
+    description: |
+      Collect all component HTML snippets from brand-output/components/:
+      - Group by category
+      - Extract CSS that uses design tokens
+      - Note component names and variants
+
+  - id: build-preview-page
+    action: generate-single-file-html
+    depends_on: [collect-components]
+    description: |
+      Generate index.html as single file with:
+      - Embedded tokens.css in <style> tag
+      - Embedded component CSS in <style> tag
+      - Navigation sidebar with category links
+      - Each component category as a section
+      - Dark/light mode toggle (JS inline)
+      - Responsive layout
+      - Brand name and colors in header
+      - Zero external dependencies
+
+      Structure:
+      ```html
+      <!DOCTYPE html>
+      <html data-theme="dark">
+      <head>
+        <style>/* All tokens + component CSS embedded */</style>
+      </head>
+      <body>
+        <nav><!-- Category navigation --></nav>
+        <main>
+          <section id="colors"><!-- Color swatches --></section>
+          <section id="typography"><!-- Type samples --></section>
+          <section id="buttons"><!-- All button variants --></section>
+          <!-- ... all categories ... -->
+        </main>
+        <script>/* Theme toggle + nav JS */</script>
+      </body>
+      </html>
+      ```
+
+  - id: validate-preview
+    action: verify-rendering
+    depends_on: [build-preview-page]
+    description: |
+      Verify preview page:
+      - All sections present
+      - Tokens properly applied
+      - Dark/light toggle works
+      - Navigation links correct
+      - No broken references
+
+error_handling:
+  on_validation_error: "Tokens and component HTML required."
+  retry_count: 1

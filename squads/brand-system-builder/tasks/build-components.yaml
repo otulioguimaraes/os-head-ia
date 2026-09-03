@@ -1,0 +1,160 @@
+name: build-components
+version: 1.0.0
+description: "Build complete UI component library across 12 categories using design tokens. Dark-mode-first, WCAG AA compliant."
+agent: component-builder
+
+metadata:
+  elicit: false
+  phase: 4
+  order: 1
+
+inputs:
+  - name: tokens_css
+    type: file
+    required: true
+    path: "brand-output/tokens/tokens.css"
+  - name: color_tokens
+    type: file
+    required: true
+    path: "brand-output/tokens/colors.json"
+  - name: typography_tokens
+    type: file
+    required: true
+    path: "brand-output/tokens/typography.json"
+  - name: spacing_tokens
+    type: file
+    required: true
+    path: "brand-output/tokens/spacing.json"
+
+outputs:
+  - name: component_docs
+    type: directory
+    path: "brand-output/docs/04-components/"
+  - name: component_html
+    type: directory
+    path: "brand-output/components/"
+
+steps:
+  - id: build-buttons
+    action: create-component-category
+    description: |
+      Build button components:
+      - Variants: primary, secondary, ghost, outline, destructive, link
+      - Sizes: sm, md, lg
+      - States: default, hover, active, focus, disabled, loading
+      - Icon support (left, right, icon-only)
+      - Output: buttons.md spec + buttons.html snippets
+
+  - id: build-cards
+    action: create-component-category
+    description: |
+      Build card components:
+      - Variants: content, profile, pricing, feature, stat, media
+      - With/without image, header, footer, actions
+      - Hover effects using motion tokens
+      - Output: cards.md spec + cards.html snippets
+
+  - id: build-forms
+    action: create-component-category
+    description: |
+      Build form components:
+      - Elements: text input, textarea, select, checkbox, radio, toggle, range, file upload
+      - States: default, focus, error, success, disabled
+      - Labels, helper text, error messages
+      - Form layouts (vertical, horizontal, inline)
+      - Output: forms.md spec + forms.html snippets
+
+  - id: build-feedback
+    action: create-component-category
+    description: |
+      Build feedback components:
+      - Alert (info, success, warning, error, with/without icon, dismissible)
+      - Toast (position variants, auto-dismiss)
+      - Badge (color variants, sizes, dot, count)
+      - Progress (bar, circular, with label)
+      - Skeleton (text, image, card shapes)
+      - Spinner (sizes)
+      - Output: feedback.md spec + feedback.html snippets
+
+  - id: build-tables
+    action: create-component-category
+    description: |
+      Build table components:
+      - Simple table with header
+      - Sortable columns
+      - Responsive (horizontal scroll on mobile)
+      - Striped rows variant
+      - Row hover, selection states
+      - Output: tables.md spec + tables.html snippets
+
+  - id: build-navigation
+    action: create-component-category
+    description: |
+      Build navigation components:
+      - Navbar (logo, links, actions, mobile hamburger)
+      - Sidebar (collapsible, with icons, nested items)
+      - Breadcrumbs (with separator variants)
+      - Tabs (horizontal, vertical, pills)
+      - Pagination (numbered, prev/next, load more)
+      - Output: navigation.md spec + navigation.html snippets
+
+  - id: build-sections
+    action: create-component-category
+    description: |
+      Build page section components:
+      - Hero (centered, split, with image/video bg)
+      - Features (grid, alternating, icon-based)
+      - CTA (simple, with image, newsletter)
+      - Testimonials (single, carousel, grid)
+      - FAQ (accordion-based)
+      - Pricing (tier cards comparison)
+      - Footer (multi-column, simple, with newsletter)
+      - Output: sections.md spec + sections.html snippets
+
+  - id: build-advanced
+    action: create-component-category
+    description: |
+      Build advanced interaction components:
+      - Modal (sizes, with form, confirmation)
+      - Dropdown menu (with icons, dividers, nested)
+      - Accordion (single/multi expand)
+      - Tooltip (positions, with arrow)
+      - Popover (with content, triggered on hover/click)
+      - Drawer (left/right/bottom, with overlay)
+      - Output: advanced.md spec + advanced.html snippets
+
+  - id: build-effects
+    action: create-component-category
+    description: |
+      Build visual effect components:
+      - Glassmorphism panels
+      - Gradient backgrounds and text
+      - Hover state animations
+      - Scroll-triggered animations
+      - Glow effects
+      - Output: effects.md spec + effects.html snippets
+
+  - id: build-patterns
+    action: create-component-category
+    description: |
+      Build layout patterns:
+      - Page layouts (sidebar, full-width, centered)
+      - Grid patterns (masonry, equal, featured)
+      - Content frames (bordered, shadowed, gradient-border)
+      - Dividers (horizontal, vertical, decorative)
+      - Output: patterns.md spec + patterns.html snippets
+
+  - id: build-templates
+    action: create-component-category
+    depends_on: [build-buttons, build-cards, build-forms, build-feedback, build-navigation, build-sections, build-advanced, build-effects, build-patterns]
+    description: |
+      Build page templates composing previous components:
+      - Landing page template
+      - Dashboard template
+      - Profile/about page template
+      - Blog post template
+      - Output: templates.md spec + templates.html full pages
+
+error_handling:
+  on_validation_error: "Design tokens required. Run Phase 2-3 first."
+  retry_count: 1

@@ -1,0 +1,129 @@
+name: build-vfx
+version: 1.0.0
+description: "Create post-processing visual effects system with advanced CSS techniques for cinematic brand experiences."
+agent: visual-designer
+
+metadata:
+  elicit: false
+  phase: 6
+  order: 2
+
+inputs:
+  - name: tokens_css
+    type: file
+    required: true
+    path: "brand-output/tokens/tokens.css"
+  - name: brand_config
+    type: file
+    required: true
+    path: "brand-config.yaml"
+  - name: effects_html
+    type: file
+    required: true
+    path: "brand-output/preview/effects.html"
+
+outputs:
+  - name: vfx_html
+    type: file
+    format: html
+    path: "brand-output/preview/vfx.html"
+  - name: vfx_doc
+    type: file
+    format: markdown
+    path: "brand-output/docs/04-components/vfx.md"
+
+steps:
+  - id: read-brand-config
+    action: load-config
+    description: |
+      Read brand-config.yaml for:
+      - Brand colors for VFX theming
+      - Logo for header
+      - Motion tokens for animations
+
+  - id: build-grain-system
+    action: create-vfx
+    depends_on: [read-brand-config]
+    description: |
+      Build film grain VFX:
+      - SVG noise filter overlay
+      - Configurable intensity (subtle, medium, heavy)
+      - Animated grain movement
+      - Toggle on/off
+
+  - id: build-blend-modes
+    action: create-vfx
+    depends_on: [read-brand-config]
+    description: |
+      Build blend mode system:
+      - Multiply, screen, overlay, soft-light demos
+      - Color overlay with brand primary
+      - Image + color blend examples
+      - Mix-blend-mode compositions
+
+  - id: build-blur-system
+    action: create-vfx
+    depends_on: [read-brand-config]
+    description: |
+      Build blur VFX system:
+      - Background blur layers
+      - Motion blur effect (CSS)
+      - Tilt-shift simulation
+      - Depth of field zones
+
+  - id: build-glow-system
+    action: create-vfx
+    depends_on: [read-brand-config]
+    description: |
+      Build glow VFX system:
+      - Neon glow with brand colors
+      - Ambient glow backgrounds
+      - Text glow effects
+      - Animated glow pulse
+
+  - id: build-overlay-system
+    action: create-vfx
+    depends_on: [read-brand-config]
+    description: |
+      Build overlay VFX system:
+      - Gradient overlays (top, bottom, full)
+      - Pattern overlays (dots, lines, grid)
+      - Color wash overlays
+      - Vignette effect
+
+  - id: build-composite-system
+    action: create-vfx
+    depends_on: [read-brand-config]
+    description: |
+      Build composite VFX system:
+      - Layered effect stacking
+      - Grain + blur + overlay combos
+      - Cinematic presets
+      - Performance-optimized compositions
+
+  - id: build-distortion-system
+    action: create-vfx
+    depends_on: [read-brand-config]
+    description: |
+      Build distortion VFX:
+      - CSS perspective transforms
+      - Skew and rotation effects
+      - Wave distortion (SVG filter)
+      - Glitch effect animation
+
+  - id: assemble-vfx-page
+    action: compile-html
+    depends_on: [build-grain-system, build-blend-modes, build-blur-system, build-glow-system, build-overlay-system, build-composite-system, build-distortion-system]
+    description: |
+      Compile all VFX into vfx.html:
+      - Navigation header with brand logo
+      - Each VFX system in its own demo section
+      - Interactive controls (intensity, color)
+      - Before/after comparisons
+      - CSS code for each effect
+      - Performance notes
+      - All styling from design tokens
+
+error_handling:
+  on_validation_error: "Design tokens and effects page required."
+  retry_count: 1

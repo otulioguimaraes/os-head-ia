@@ -1,0 +1,168 @@
+# brand-config.yaml — Single Source of Truth
+# Copy this template and fill in your brand's details.
+# All tasks, templates, and scripts read from this file.
+
+brand:
+  name: ""                        # Brand name (e.g., "Acme")
+  full_name: ""                   # Full name or legal name
+  tagline: ""                     # Primary tagline
+  description: ""                 # One-paragraph brand description
+  year: 2026                      # Year of creation
+  version: "1.0"                  # Brand system version
+  language: "pt-BR"               # Primary language
+
+  # Logo system
+  logo:
+    primary: ""                   # Primary logo text (e.g., "/tg.")
+    icon: ""                      # Icon/favicon version (e.g., "/.")
+    minimal: ""                   # Minimal version (e.g., "tg")
+    tri_color:                    # Multi-color logo treatment
+      parts: []                   # [{text: "/", color: "gray"}, {text: "tg", color: "cream"}, {text: ".", color: "primary"}]
+
+  # Symbols & meaning
+  symbols: []                     # [{glyph: "/", name: "The Cut", meaning: "Disruption"}]
+
+  # Sub-brands
+  sub_brands: []                  # [{name: "Core", description: "Main offering"}]
+
+  # Colors
+  colors:
+    primary: ""                   # Primary brand color hex (e.g., "#F26B3A")
+    primary_light: ""             # Lighter variant
+    primary_dark: ""              # Darker variant
+    secondary: ""                 # Secondary color
+    cream: ""                     # Light background
+    accent: ""                    # Accent/highlight color
+    neutrals:                     # Neutral scale (dark to light)
+      n950: ""
+      n900: ""
+      n800: ""
+      n700: ""
+      n600: ""
+      n500: ""
+      n400: ""
+      n300: ""
+      n200: ""
+      n100: ""
+      n50: ""
+    semantic:                     # Semantic colors
+      success: ""
+      warning: ""
+      error: ""
+      info: ""
+
+  # Typography
+  typography:
+    heading: ""                   # Heading font family (e.g., "Space Grotesk")
+    heading_weights: [700, 800]   # Available weights
+    body: ""                      # Body font family (e.g., "Inter")
+    body_weights: [400, 500, 600] # Available weights
+    mono: ""                      # Monospace font (e.g., "JetBrains Mono")
+    mono_weights: [400, 600]      # Available weights
+    scale_ratio: 1.25             # Type scale ratio (major third)
+    base_size: "1rem"             # Base font size
+
+  # Voice & personality
+  voice:
+    archetypes:                   # Jung archetypes with weight
+      - name: ""
+        weight: 0                 # Percentage (all weights sum to 100)
+      - name: ""
+        weight: 0
+    tone_spectrum:                # Axes from 1-10
+      formal_casual: 5
+      technical_accessible: 5
+      serious_playful: 5
+      conventional_provocative: 5
+    words_use: []                 # Words that represent the brand
+    words_ban: []                 # Words to avoid
+    taglines:                     # 5 taglines with type and usage
+      - text: ""
+        type: ""                  # hero, social, manifesto, elevator, internal
+        usage: ""
+
+  # Founder(s)
+  founders:
+    - name: ""
+      role: ""
+      bio: ""
+      mantras: []                 # Personal mantras/beliefs
+
+  # Audience personas
+  personas:
+    - name: ""
+      age: ""
+      role: ""
+      pain: ""                    # Core pain point
+      aspiration: ""              # What they want to achieve
+      channels: []                # Where they consume content
+
+  # Content & narrative
+  hero_journey:                   # 4-act hero journey
+    - act: "The World Before"
+      description: ""
+    - act: "The Awakening"
+      description: ""
+    - act: "The Transformation"
+      description: ""
+    - act: "The New World"
+      description: ""
+
+  brandscript:                    # StoryBrand SB7 framework
+    character: ""                 # Who is the hero?
+    problem:
+      external: ""
+      internal: ""
+      philosophical: ""
+    guide: ""                     # The brand as guide
+    plan: []                      # 3-step plan
+    call_to_action: ""
+    success: ""                   # What success looks like
+    failure: ""                   # What failure looks like
+
+  brand_contract:
+    promises: []                  # What the brand promises
+    demands: []                   # What it demands from the audience
+    oath: ""                      # Brand oath statement
+
+  # SEO & social
+  seo:
+    title: ""                     # Default page title
+    description: ""               # Meta description
+    keywords: []                  # SEO keywords
+    og_image: ""                  # Open Graph image path
+    twitter_handle: ""
+    domain: ""                    # Brand website domain
+
+  # Pages (for site generation)
+  pages:
+    - id: "index"
+      title: "Home"
+      nav: true
+    - id: "brandbook"
+      title: "Brandbook"
+      nav: true
+    - id: "foundations"
+      title: "Foundations"
+      nav: true
+    - id: "components"
+      title: "Components"
+      nav: true
+    - id: "sections"
+      title: "Sections"
+      nav: true
+    - id: "effects"
+      title: "Effects"
+      nav: true
+    - id: "templates"
+      title: "Templates"
+      nav: true
+    - id: "vfx"
+      title: "VFX"
+      nav: true
+    - id: "seo"
+      title: "SEO"
+      nav: true
+    - id: "motion"
+      title: "Motion"
+      nav: true

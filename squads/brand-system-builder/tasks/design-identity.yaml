@@ -1,0 +1,118 @@
+name: design-identity
+version: 1.0.0
+description: "Create complete visual identity: color palette, typography system, logo concept, and brand guidelines."
+agent: visual-designer
+
+metadata:
+  elicit: true
+  phase: 2
+  order: 1
+
+inputs:
+  - name: positioning
+    type: file
+    required: true
+    path: "brand-output/docs/01-strategy/positioning.md"
+  - name: archetype
+    type: file
+    required: true
+    path: "brand-output/docs/01-strategy/archetype.md"
+  - name: manifesto
+    type: file
+    required: true
+    path: "brand-output/docs/01-strategy/manifesto.md"
+  - name: moodboard
+    type: file
+    required: true
+    path: "brand-output/docs/01-strategy/moodboard.md"
+  - name: color_preference
+    type: string
+    required: false
+    description: "User color preference from discovery (if any)"
+
+outputs:
+  - name: color_palette
+    type: file
+    format: markdown
+    path: "brand-output/docs/02-identity/color-palette.md"
+  - name: typography
+    type: file
+    format: markdown
+    path: "brand-output/docs/02-identity/typography.md"
+  - name: logo_system
+    type: file
+    format: markdown
+    path: "brand-output/docs/02-identity/logo-system.md"
+  - name: guidelines
+    type: file
+    format: markdown
+    path: "brand-output/docs/02-identity/guidelines.md"
+
+steps:
+  - id: analyze-strategy
+    action: extract-visual-direction
+    description: |
+      From Phase 1 outputs, extract:
+      - Archetype color associations
+      - Personality-driven visual direction
+      - Moodboard keywords to visual concepts
+      - Audience visual expectations
+
+  - id: generate-palette
+    action: create-color-system
+    depends_on: [analyze-strategy]
+    description: |
+      Create color palette with:
+      - Primary color (1-2 hues) with rationale
+      - Secondary color (1-2 complementary hues)
+      - Accent color (for CTAs, highlights)
+      - Neutral scale (8-10 shades, gray/slate)
+      - Semantic colors (success, warning, error, info)
+      - Dark mode variants (all colors adapted)
+      - Light mode variants
+      - Each color: hex, RGB, HSL values
+      - WCAG AA contrast verification for text combos
+
+      Present to user for approval before proceeding.
+
+  - id: define-typography
+    action: create-type-system
+    depends_on: [analyze-strategy]
+    description: |
+      Define typography system with:
+      - Heading font family (display/impact)
+      - Body font family (readable)
+      - Mono font family (code/tech elements)
+      - Type scale (h1-h6, body-lg, body, body-sm, caption)
+      - Font weights per role
+      - Line heights per role
+      - Letter spacing adjustments
+      - Font pairing rationale
+
+  - id: conceptualize-logo
+    action: create-logo-concept
+    depends_on: [generate-palette, define-typography]
+    description: |
+      Define logo system (conceptual, not graphic):
+      - Wordmark concept (typography-based logo)
+      - Symbol/icon concept (optional)
+      - Logo variations (full, compact, icon-only)
+      - Minimum sizes and spacing rules
+      - Color usage on different backgrounds
+      - Forbidden usages (do/don't)
+
+  - id: write-guidelines
+    action: compile-guidelines
+    depends_on: [conceptualize-logo]
+    description: |
+      Compile brand guidelines document:
+      - Logo usage rules
+      - Color application rules
+      - Typography hierarchy rules
+      - Spacing and layout principles
+      - Photography/imagery style direction
+      - Social media asset guidelines
+
+error_handling:
+  on_validation_error: "Phase 1 documents required. Run Phase 1 first."
+  retry_count: 1

@@ -1,0 +1,132 @@
+archetypes:
+  - name: The Innocent
+    alias: Optimist
+    motto: "Free to be you and me"
+    traits: [optimistic, honest, pure, simple, trustworthy]
+    values: [happiness, simplicity, faith, goodness]
+    fear: Doing something wrong or bad
+    voice: Warm, genuine, straightforward
+    color_associations: [white, light blue, pastel, soft yellow]
+    brands: [Dove, Coca-Cola, Nintendo]
+    best_for: "Brands that promote simplicity, trust, nostalgia"
+
+  - name: The Explorer
+    alias: Adventurer
+    motto: "Don't fence me in"
+    traits: [adventurous, independent, ambitious, pioneering, individualistic]
+    values: [freedom, discovery, self-expression, authenticity]
+    fear: Being trapped or conforming
+    voice: Bold, adventurous, inspiring
+    color_associations: [earth tones, green, brown, orange, khaki]
+    brands: [Patagonia, Jeep, North Face, REI]
+    best_for: "Brands that encourage exploration, freedom, authenticity"
+
+  - name: The Sage
+    alias: Scholar
+    motto: "The truth will set you free"
+    traits: [wise, knowledgeable, analytical, thoughtful, trusted advisor]
+    values: [truth, knowledge, understanding, intelligence]
+    fear: Being misled or ignorant
+    voice: Authoritative, educational, precise
+    color_associations: [navy blue, deep green, gray, gold]
+    brands: [Google, BBC, TED, Harvard]
+    best_for: "Brands that educate, inform, provide expertise"
+
+  - name: The Hero
+    alias: Warrior
+    motto: "Where there's a will, there's a way"
+    traits: [courageous, bold, determined, strong, disciplined]
+    values: [mastery, courage, growth, honor]
+    fear: Weakness, vulnerability
+    voice: Motivational, direct, powerful
+    color_associations: [red, black, dark blue, silver]
+    brands: [Nike, FedEx, BMW, U.S. Army]
+    best_for: "Brands that inspire action, achievement, transformation"
+
+  - name: The Outlaw
+    alias: Rebel
+    motto: "Rules are made to be broken"
+    traits: [rebellious, disruptive, provocative, revolutionary, unconventional]
+    values: [liberation, revolution, change, disruption]
+    fear: Being powerless, insignificant
+    voice: Provocative, bold, unapologetic
+    color_associations: [black, red, dark purple, neon accents]
+    brands: [Harley-Davidson, Virgin, Diesel, Tesla]
+    best_for: "Brands that challenge status quo, disrupt markets"
+
+  - name: The Magician
+    alias: Visionary
+    motto: "I make things happen"
+    traits: [visionary, transformative, charismatic, innovative, imaginative]
+    values: [transformation, vision, innovation, wonder]
+    fear: Unintended negative consequences
+    voice: Visionary, inspiring, mysterious
+    color_associations: [purple, dark blue, gold, iridescent]
+    brands: [Apple, Disney, Tesla, Dyson]
+    best_for: "Brands that transform, innovate, create magic"
+
+  - name: The Regular Guy
+    alias: Everyman
+    motto: "All men and women are created equal"
+    traits: [relatable, authentic, down-to-earth, friendly, egalitarian]
+    values: [belonging, connection, equality, empathy]
+    fear: Being left out or standing out too much
+    voice: Casual, friendly, relatable
+    color_associations: [warm neutrals, blue, muted colors]
+    brands: [IKEA, Target, Budweiser, Gap]
+    best_for: "Brands that connect with everyday people"
+
+  - name: The Lover
+    alias: Sensualist
+    motto: "You're the only one"
+    traits: [passionate, intimate, sensual, committed, appreciative]
+    values: [intimacy, beauty, passion, experience]
+    fear: Being unwanted, unloved
+    voice: Sensual, warm, emotional
+    color_associations: [red, pink, burgundy, rose gold]
+    brands: [Chanel, Victoria's Secret, Godiva, Alfa Romeo]
+    best_for: "Brands focused on beauty, pleasure, relationships"
+
+  - name: The Jester
+    alias: Entertainer
+    motto: "You only live once"
+    traits: [fun, humorous, lighthearted, irreverent, original]
+    values: [joy, humor, living in the moment, entertainment]
+    fear: Being boring or bored
+    voice: Witty, playful, irreverent
+    color_associations: [bright colors, yellow, orange, multicolor]
+    brands: [M&Ms, Old Spice, Dollar Shave Club, Ben & Jerry's]
+    best_for: "Brands that entertain, make people laugh"
+
+  - name: The Caregiver
+    alias: Nurturer
+    motto: "Love your neighbor as yourself"
+    traits: [caring, generous, compassionate, protective, selfless]
+    values: [service, generosity, protection, compassion]
+    fear: Selfishness, ingratitude
+    voice: Warm, nurturing, supportive
+    color_associations: [soft blue, green, white, warm neutrals]
+    brands: [Johnson & Johnson, UNICEF, Volvo, Campbell's]
+    best_for: "Brands that care for, protect, serve others"
+
+  - name: The Creator
+    alias: Artist
+    motto: "If you can imagine it, it can be done"
+    traits: [creative, innovative, artistic, imaginative, expressive]
+    values: [creativity, self-expression, vision, innovation]
+    fear: Mediocrity, lack of originality
+    voice: Inspiring, artistic, expressive
+    color_associations: [vibrant colors, unique palettes, rainbow, gradient]
+    brands: [Adobe, LEGO, Crayola, Pinterest]
+    best_for: "Brands that create, inspire creativity, build things"
+
+  - name: The Ruler
+    alias: Leader
+    motto: "Power isn't everything, it's the only thing"
+    traits: [authoritative, commanding, responsible, organized, powerful]
+    values: [power, control, stability, prosperity]
+    fear: Chaos, being overthrown
+    voice: Commanding, refined, authoritative
+    color_associations: [black, gold, navy, deep purple, silver]
+    brands: [Rolex, Mercedes-Benz, Microsoft, American Express]
+    best_for: "Premium brands, leadership positioning, luxury"

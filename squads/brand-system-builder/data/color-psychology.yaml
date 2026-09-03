@@ -1,0 +1,98 @@
+color_psychology:
+  red:
+    emotions: [passion, energy, urgency, excitement, power]
+    associations: [action, danger, love, appetite]
+    industries: [food, entertainment, tech, sports]
+    personality: Bold, aggressive, urgent
+    dark_mode: "Use as accent, not background. Reduce saturation slightly for eye comfort."
+    pairings: [black, white, dark gray, gold]
+
+  blue:
+    emotions: [trust, stability, calm, professionalism, security]
+    associations: [corporate, technology, sky, ocean]
+    industries: [finance, technology, healthcare, social media]
+    personality: Trustworthy, professional, calm
+    dark_mode: "Works excellent in dark mode. Use lighter tints for text, darker shades for surfaces."
+    pairings: [white, light gray, gold, orange]
+
+  green:
+    emotions: [growth, nature, health, freshness, prosperity]
+    associations: [eco, money, health, go-signal]
+    industries: [health, finance, environment, food]
+    personality: Natural, healthy, prosperous
+    dark_mode: "Neon/bright greens work well as accents in dark mode. Avoid dull greens."
+    pairings: [white, brown, black, gold]
+
+  purple:
+    emotions: [luxury, creativity, mystery, wisdom, spirituality]
+    associations: [royalty, magic, innovation, premium]
+    industries: [luxury, beauty, tech, creative]
+    personality: Creative, luxurious, mysterious
+    dark_mode: "Excellent for dark mode. Deep purples for surfaces, bright for accents."
+    pairings: [gold, white, light gray, pink]
+
+  orange:
+    emotions: [enthusiasm, creativity, warmth, confidence, fun]
+    associations: [energy, playfulness, affordability, youth]
+    industries: [entertainment, food, tech, sports]
+    personality: Energetic, friendly, confident
+    dark_mode: "Use sparingly as accent. High contrast on dark backgrounds."
+    pairings: [dark blue, black, white, teal]
+
+  yellow:
+    emotions: [optimism, clarity, warmth, happiness, attention]
+    associations: [sunshine, caution, intelligence, energy]
+    industries: [food, entertainment, kids, construction]
+    personality: Optimistic, cheerful, attention-grabbing
+    dark_mode: "Challenging in dark mode. Use as accent only, not for large areas."
+    pairings: [black, dark gray, navy, purple]
+
+  black:
+    emotions: [power, elegance, sophistication, authority, mystery]
+    associations: [luxury, premium, tech, formal]
+    industries: [luxury, fashion, tech, automotive]
+    personality: Powerful, elegant, premium
+    dark_mode: "Foundation of dark mode. Use pure black sparingly, prefer dark grays."
+    pairings: [white, gold, red, any bright accent]
+
+  white:
+    emotions: [purity, cleanliness, simplicity, space, clarity]
+    associations: [minimal, clean, modern, healthcare]
+    industries: [healthcare, tech, fashion, minimal brands]
+    personality: Clean, minimal, spacious
+    dark_mode: "Use for text and high-contrast elements. Reduce to off-white for less harshness."
+    pairings: [black, any color as accent]
+
+  gold:
+    emotions: [luxury, prestige, success, quality, tradition]
+    associations: [premium, achievement, wealth, warmth]
+    industries: [luxury, finance, awards, premium brands]
+    personality: Premium, prestigious, warm authority
+    dark_mode: "Stunning on dark backgrounds. Use for headlines, accents, borders."
+    pairings: [black, navy, dark purple, white]
+
+  neon_colors:
+    emotions: [energy, futurism, tech, youth, edginess]
+    associations: [cyberpunk, tech, gaming, nightlife]
+    industries: [tech, gaming, music, startups]
+    personality: Cutting-edge, energetic, modern
+    dark_mode: "Born for dark mode. Neon accents on dark surfaces create maximum impact."
+    pairings: [black, dark gray, complementary neons]
+
+personality_to_palette:
+  provocative_bold:
+    primary: [black, dark red, neon]
+    style: "High contrast, dark backgrounds, bright accents"
+    reference: "Alex Hormozi, Gary Vee energy"
+  authoritative_serious:
+    primary: [navy, dark gray, gold]
+    style: "Corporate luxury, muted elegance"
+    reference: "McKinsey, Goldman Sachs energy"
+  tech_cool_modern:
+    primary: [dark blue, purple, cyan neon]
+    style: "Futuristic, gradients, dark mode native"
+    reference: "Vercel, Linear, Stripe energy"
+  accessible_didactic:
+    primary: [blue, green, warm neutrals]
+    style: "Friendly, readable, approachable"
+    reference: "Notion, Duolingo energy"

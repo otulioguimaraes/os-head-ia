@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OS_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 DIST_DIR="$OS_ROOT/dist"
 PACKAGE_DIR_NAME="os-head-ia-v0"
-RELEASE_NAME="os-head-ia-v0.4"
+RELEASE_NAME="os-head-ia-v0.5"
 STAGING_DIR="$(mktemp -d)"
 trap 'rm -rf -- "$STAGING_DIR"' EXIT
 
@@ -27,7 +27,7 @@ cp -R "$OS_ROOT/skills/os/." "$STAGING_DIR/$PACKAGE_DIR_NAME/.claude/skills/"
 
 for target in .agents/skills .claude/skills; do
   COUNT="$(find "$STAGING_DIR/$PACKAGE_DIR_NAME/$target" -mindepth 2 -maxdepth 2 -name SKILL.md -type f | wc -l | tr -d ' ')"
-  [[ "$COUNT" -eq 11 ]] || { echo "ERRO: pacote teria $COUNT skills em $target; esperava 11." >&2; exit 1; }
+  [[ "$COUNT" -eq 13 ]] || { echo "ERRO: pacote teria $COUNT skills em $target; esperava 13." >&2; exit 1; }
   diff -qr "$OS_ROOT/skills/os" "$STAGING_DIR/$PACKAGE_DIR_NAME/$target" >/dev/null || {
     echo "ERRO: skills empacotadas em $target estão dessincronizadas." >&2
     exit 1

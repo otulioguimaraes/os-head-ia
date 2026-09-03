@@ -1,0 +1,82 @@
+name: write-manifesto
+version: 1.0.0
+description: "Generate brand manifesto, voice guidelines, and textual moodboard based on positioning and archetype."
+agent: brand-strategist
+
+metadata:
+  elicit: false
+  phase: 1
+  order: 3
+
+inputs:
+  - name: positioning
+    type: file
+    required: true
+    path: "brand-output/docs/01-strategy/positioning.md"
+  - name: archetype
+    type: file
+    required: true
+    path: "brand-output/docs/01-strategy/archetype.md"
+
+outputs:
+  - name: manifesto
+    type: file
+    format: markdown
+    path: "brand-output/docs/01-strategy/manifesto.md"
+  - name: brand_voice
+    type: file
+    format: markdown
+    path: "brand-output/docs/01-strategy/brand-voice.md"
+  - name: moodboard
+    type: file
+    format: markdown
+    path: "brand-output/docs/01-strategy/moodboard.md"
+
+steps:
+  - id: synthesize-voice
+    action: analyze-inputs
+    description: |
+      From positioning + archetype, derive:
+      - Tone of voice (formal/casual/bold/friendly)
+      - Vocabulary style (technical/accessible/provocative)
+      - Communication principles (3-5 rules)
+      - Content pillars (3-5 themes)
+
+  - id: write-manifesto
+    action: generate-manifesto
+    depends_on: [synthesize-voice]
+    description: |
+      Write brand manifesto using manifesto-tmpl.md template.
+      The manifesto should:
+      - Be written IN the brand's voice (not about it)
+      - Include mission, vision, values
+      - Have a powerful opening statement
+      - Be 200-400 words
+      - Feel authentic to the archetype
+
+  - id: write-voice-guide
+    action: generate-voice-guidelines
+    depends_on: [synthesize-voice]
+    description: |
+      Generate brand-voice.md with:
+      - Tone spectrum (where on formal-casual, serious-playful, etc.)
+      - Vocabulary do/don't lists
+      - Example phrases for different contexts
+      - Social media voice adaptation per channel
+      - Content pillar descriptions
+
+  - id: create-moodboard
+    action: generate-moodboard
+    depends_on: [synthesize-voice]
+    description: |
+      Generate moodboard.md with:
+      - 10-15 keywords that define the brand feeling
+      - Emotional tone description
+      - Visual direction hints (for Phase 2)
+      - Reference brands/people with similar energy
+      - Texture and material associations
+      - Music/sound associations (for video content)
+
+error_handling:
+  on_validation_error: "Positioning and archetype documents required."
+  retry_count: 1

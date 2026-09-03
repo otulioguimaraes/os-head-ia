@@ -22,10 +22,10 @@ for file in README.md COMECE-AQUI.md AGENTS.md CLAUDE.md COMANDOS.md memoria.md 
 done
 
 SKILL_COUNT="$(find "$OS_ROOT/skills/os" -mindepth 2 -maxdepth 2 -name SKILL.md -type f 2>/dev/null | wc -l | tr -d ' ')"
-if [[ "$SKILL_COUNT" -eq 11 ]]; then
-  ok "11 skills canônicas encontradas"
+if [[ "$SKILL_COUNT" -eq 13 ]]; then
+  ok "13 skills canônicas encontradas"
 else
-  fail "esperava 11 skills; encontrei $SKILL_COUNT"
+  fail "esperava 13 skills; encontrei $SKILL_COUNT"
 fi
 
 check_installed_skills() {
@@ -33,12 +33,12 @@ check_installed_skills() {
   local target="$2"
   local count
   count="$(find "$target" -mindepth 2 -maxdepth 2 -name SKILL.md -type f 2>/dev/null | wc -l | tr -d ' ')"
-  if [[ "$count" -ne 11 ]]; then
-    fail "$label: esperava 11 skills instaladas; encontrei $count. Rode skills/sync-skills.sh"
+  if [[ "$count" -ne 13 ]]; then
+    fail "$label: esperava 13 skills instaladas; encontrei $count. Rode skills/sync-skills.sh"
     return
   fi
   if diff -qr "$OS_ROOT/skills/os" "$target" >/dev/null 2>&1; then
-    ok "$label: 11 skills instaladas e sincronizadas"
+    ok "$label: 13 skills instaladas e sincronizadas"
   else
     fail "$label: skills instaladas estão desatualizadas. Rode skills/sync-skills.sh"
   fi
@@ -46,6 +46,12 @@ check_installed_skills() {
 
 check_installed_skills "Codex" "$OS_ROOT/.agents/skills"
 check_installed_skills "Claude Code" "$OS_ROOT/.claude/skills"
+
+if [[ -f "$OS_ROOT/squads/brand-system-builder/workflows/brand-system-pipeline.yaml" ]]; then
+  ok "squad Brand System Builder disponível"
+else
+  fail "squad Brand System Builder ausente"
+fi
 
 if command -v git >/dev/null 2>&1; then
   ok "Git disponível: $(git --version)"

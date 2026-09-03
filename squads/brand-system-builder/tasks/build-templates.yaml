@@ -1,0 +1,122 @@
+name: build-templates
+version: 1.0.0
+description: "Build reusable page layout templates that compose components and sections into complete page structures."
+agent: component-builder
+
+metadata:
+  elicit: false
+  phase: 6
+  order: 1
+
+inputs:
+  - name: tokens_css
+    type: file
+    required: true
+    path: "brand-output/tokens/tokens.css"
+  - name: brand_config
+    type: file
+    required: true
+    path: "brand-config.yaml"
+  - name: sections_html
+    type: file
+    required: true
+    path: "brand-output/preview/sections.html"
+  - name: component_html
+    type: directory
+    required: true
+    path: "brand-output/components/"
+
+outputs:
+  - name: templates_html
+    type: file
+    format: html
+    path: "brand-output/preview/templates.html"
+  - name: templates_doc
+    type: file
+    format: markdown
+    path: "brand-output/docs/04-components/templates.md"
+
+steps:
+  - id: read-brand-config
+    action: load-config
+    description: |
+      Read brand-config.yaml for:
+      - Pages list for navigation
+      - Brand identity for header/footer
+      - Typography and color tokens
+
+  - id: build-shell-template
+    action: create-template
+    depends_on: [read-brand-config]
+    description: |
+      Build app shell template:
+      - Fixed header with nav
+      - Main content area
+      - Footer
+      - Sidebar (optional)
+      - Responsive breakpoints
+
+  - id: build-bento-template
+    action: create-template
+    depends_on: [read-brand-config]
+    description: |
+      Build bento grid template:
+      - Mixed-size grid cards
+      - Featured (large) + regular (small) items
+      - Responsive reflow
+      - Gap and padding from spacing tokens
+
+  - id: build-autofit-template
+    action: create-template
+    depends_on: [read-brand-config]
+    description: |
+      Build auto-fit grid template:
+      - CSS Grid auto-fit with minmax
+      - Responsive without media queries
+      - Configurable min/max card width
+
+  - id: build-sidebar-template
+    action: create-template
+    depends_on: [read-brand-config]
+    description: |
+      Build sidebar layout template:
+      - Fixed sidebar with navigation
+      - Scrollable main content
+      - Collapsible sidebar on mobile
+      - Sticky header within content
+
+  - id: build-split-template
+    action: create-template
+    depends_on: [read-brand-config]
+    description: |
+      Build split layout template:
+      - 50/50 or 60/40 split
+      - Image + content sides
+      - Alternating sides per section
+      - Full-height sections
+
+  - id: build-masonry-template
+    action: create-template
+    depends_on: [read-brand-config]
+    description: |
+      Build masonry layout template:
+      - CSS columns masonry
+      - Variable height cards
+      - Responsive column count
+      - Gap and spacing from tokens
+
+  - id: assemble-templates-page
+    action: compile-html
+    depends_on: [build-shell-template, build-bento-template, build-autofit-template, build-sidebar-template, build-split-template, build-masonry-template]
+    description: |
+      Compile all templates into templates.html:
+      - Navigation header with brand logo
+      - Each template shown as wireframe preview
+      - Annotated layout structure
+      - Responsive demos
+      - CSS code for each template
+      - All styling from design tokens
+
+error_handling:
+  on_validation_error: "Design tokens, sections, and brand config required."
+  retry_count: 1

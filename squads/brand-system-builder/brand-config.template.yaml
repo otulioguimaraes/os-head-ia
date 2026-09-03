@@ -1,0 +1,182 @@
+# brand-config.yaml — Single Source of Truth da sua marca
+#
+# Esse arquivo é a fonte única que o squad `brand-system-builder` lê pra gerar
+# todo o seu design system. NÃO precisa preencher à mão — o jeito recomendado é:
+#
+#   No Claude Code (ou Antigravity), abra essa pasta e diga em linguagem natural:
+#
+#   "Quero rodar o squad `brand-system-builder` pra criar o design system da
+#    minha marca. Antes de começar, me ajude a configurar — me pergunte o que
+#    você precisa saber sobre tom, paleta, fonts, audiência, posicionamento,
+#    etc., e vai preenchendo esse brand-config.yaml conforme eu respondo."
+#
+# O modelo conduz a entrevista e preenche tudo pra você. Se quiser, dá pra
+# editar manualmente depois.
+#
+# Quando estiver preenchido, salve como `brand-config.yaml` (sem o `.template`).
+
+brand:
+  name: ""                          # Nome da marca (ex: "Acme")
+  full_name: ""                     # Nome completo / razão social
+  tagline: ""                       # Tagline principal
+  description: ""                   # 1 parágrafo descrevendo a marca
+  year: 2026                        # Ano de criação
+  version: "1.0"                    # Versão do design system
+  language: "pt-BR"                 # Idioma principal
+
+  # Sistema de logo
+  logo:
+    primary: ""                     # Logo primária em texto (ex: "Acme")
+    icon: ""                        # Versão ícone/favicon (ex: "A.")
+    minimal: ""                     # Versão minimalista
+    tri_color:                      # Logo multi-cor (opcional)
+      parts: []                     # [{text: "Ac", color: "primary"}, {text: "me", color: "neutral"}]
+
+  # Símbolos e significado (opcional)
+  symbols: []                       # [{glyph: "→", name: "Avanço", meaning: "Movimento"}]
+
+  # Sub-marcas (opcional)
+  sub_brands: []                    # [{name: "Core", description: "Oferta principal"}]
+
+  # Cores
+  colors:
+    primary: ""                     # Cor primária em hex (ex: "#3D98FF")
+    primary_light: ""               # Variação mais clara
+    primary_dark: ""                # Variação mais escura
+    secondary: ""                   # Cor secundária
+    cream: ""                       # Background claro
+    accent: ""                      # Cor de destaque
+    neutrals:                       # Escala de neutros (do mais escuro ao mais claro)
+      n950: ""
+      n900: ""
+      n800: ""
+      n700: ""
+      n600: ""
+      n500: ""
+      n400: ""
+      n300: ""
+      n200: ""
+      n100: ""
+      n50: ""
+    semantic:                       # Cores semânticas
+      success: ""
+      warning: ""
+      error: ""
+      info: ""
+
+  # Tipografia
+  typography:
+    heading: ""                     # Família da fonte de heading (ex: "Space Grotesk")
+    heading_weights: [400, 700]     # Pesos disponíveis
+    body: ""                        # Família da fonte de body (ex: "Inter")
+    body_weights: [400, 500, 600]   # Pesos disponíveis
+    mono: ""                        # Fonte monoespaçada (ex: "JetBrains Mono")
+    mono_weights: [400, 600]
+    scale_ratio: 1.25               # Razão da escala tipográfica (1.25 = major third)
+    base_size: "1rem"               # Tamanho base
+
+  # Voz e personalidade
+  voice:
+    archetypes:                     # Arquétipos de Jung — total deve somar 100
+      - name: ""                    # Ex: "Sage", "Hero", "Creator", "Magician", etc.
+        weight: 0                   # Porcentagem
+      - name: ""
+        weight: 0
+    tone_spectrum:                  # Eixos de tom de 1-10
+      formal_casual: 5              # 1=muito formal, 10=muito casual
+      technical_accessible: 5       # 1=denso/técnico, 10=acessível
+      serious_playful: 5            # 1=sério, 10=brincalhão
+      conventional_provocative: 5   # 1=conservador, 10=provocador
+    words_use: []                   # Palavras que representam a marca
+    words_ban: []                   # Palavras a evitar
+    taglines:                       # 5 taglines (tipos: hero, social, manifesto, elevator, internal)
+      - text: ""
+        type: ""
+        usage: ""
+
+  # Founder(s) da marca
+  founders:
+    - name: ""
+      role: ""
+      bio: ""
+      mantras: []                   # Mantras/crenças pessoais
+
+  # Personas de audiência
+  personas:
+    - name: ""
+      age: ""
+      role: ""
+      pain: ""                      # Dor principal
+      aspiration: ""                # O que quer alcançar
+      channels: []                  # Onde consome conteúdo
+
+  # Narrativa — Hero Journey de 4 atos
+  hero_journey:
+    - act: "The World Before"
+      description: ""
+    - act: "The Awakening"
+      description: ""
+    - act: "The Transformation"
+      description: ""
+    - act: "The New World"
+      description: ""
+
+  # StoryBrand SB7
+  brandscript:
+    character: ""                   # Quem é o herói? (cliente)
+    problem:
+      external: ""                  # Problema visível
+      internal: ""                  # Problema emocional
+      philosophical: ""             # Problema filosófico
+    guide: ""                       # A marca como guia
+    plan: []                        # Plano em 3 passos
+    call_to_action: ""
+    success: ""                     # Como é o sucesso
+    failure: ""                     # Como é o fracasso
+
+  brand_contract:
+    promises: []                    # O que a marca promete
+    demands: []                     # O que ela exige da audiência
+    oath: ""                        # Juramento da marca
+
+  # SEO & social
+  seo:
+    title: ""
+    description: ""
+    keywords: []
+    og_image: ""
+    twitter_handle: ""
+    domain: ""
+
+  # Páginas a gerar (deixe como está pro brandbook completo)
+  pages:
+    - id: "index"
+      title: "Home"
+      nav: true
+    - id: "brandbook"
+      title: "Brandbook"
+      nav: true
+    - id: "foundations"
+      title: "Foundations"
+      nav: true
+    - id: "components"
+      title: "Components"
+      nav: true
+    - id: "sections"
+      title: "Sections"
+      nav: true
+    - id: "effects"
+      title: "Effects"
+      nav: true
+    - id: "templates"
+      title: "Templates"
+      nav: true
+    - id: "vfx"
+      title: "VFX"
+      nav: true
+    - id: "seo"
+      title: "SEO"
+      nav: true
+    - id: "motion"
+      title: "Motion"
+      nav: true

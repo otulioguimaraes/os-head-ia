@@ -85,7 +85,19 @@ Digite `/sessao`. O agente atualizará `memoria.md`, o log e `saidas/RETOMAR.md`
 
 Faça disso um ritual: **toda sessão de trabalho útil termina com `/sessao`**.
 
-## 7. Complete o ciclo semanal depois
+## 7. Mapeie as próximas fontes
+
+Depois que a primeira vitória estiver pronta, use:
+
+```text
+/mapear-fontes
+```
+
+O agente fará uma entrevista curta sobre onde seu trabalho realmente acontece, separará fontes pessoais e profissionais e recomendará o que vale conectar primeiro. O resultado fica em `conexoes/MAPA-DE-FONTES.md`.
+
+Essa etapa apenas prepara o plano. Nenhuma conta será acessada, instalada ou autenticada durante o mapeamento. Ao final, você poderá seguir com `/conectar <fonte>`.
+
+## 8. Complete o ciclo semanal depois
 
 Quando já houver alguns dias de evidência, use:
 
@@ -105,3 +117,5 @@ Diagnostique o meu OS sem apagar dados. Rode a verificação apropriada ao meu s
 Consulte também [GUIA-DO-ALUNO.md](GUIA-DO-ALUNO.md).
 
 Depois da aula, use [GUIA-COMPLETO-DO-OS.md](GUIA-COMPLETO-DO-OS.md) para evoluir do primeiro contexto até segundo cérebro, rotinas e Agentic OS.
+
+Como capacidade adicional, `/design-system` documenta uma marca existente ou conduz o squad de criação e reconstrução disponível em `squads/brand-system-builder/`.

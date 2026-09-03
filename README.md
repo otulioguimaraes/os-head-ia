@@ -59,11 +59,16 @@ O primeiro ciclo operacional tem três rotinas: briefing da manhã, fechamento s
 - `rotinas/`: contratos das rotinas recorrentes.
 - `saidas/`: entregáveis, registros diários e ponto de retomada.
 - `skills/`: instruções internas que permitem ao agente conduzir cada rotina.
+- `squads/`: papéis, tarefas e checkpoints para construções maiores.
 - `guias/`: instruções humanas, inclusive conexões.
 
 O índice [guias/conexoes/README.md](guias/conexoes/README.md) explica quais fontes possuem conector oficial, exportação ou rota local e como testar cada uma sem começar por programação.
 
 Quando uma fonte não estiver no catálogo, use `/search-connectors <aplicativo>`. A skill pesquisa opções atuais, prioriza o fornecedor oficial e para antes de instalar ou autenticar sem autorização.
+
+Se você ainda não souber o que conectar, use `/mapear-fontes`. A entrevista parte do seu trabalho real, separa fontes pessoais e profissionais e entrega uma ordem segura de conexão.
+
+O comando `/design-system` oferece dois caminhos: documentar a identidade que já existe ou conduzir o `brand-system-builder`, um squad completo para criar ou reformular estratégia, identidade, tokens, componentes e preview.
 
 As visualizações avançadas possuem guias próprios:
 

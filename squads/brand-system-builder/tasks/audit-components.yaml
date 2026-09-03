@@ -1,0 +1,84 @@
+name: audit-components
+version: 1.0.0
+description: "Audit component library for token usage, accessibility compliance, and quality standards."
+agent: component-builder
+
+metadata:
+  elicit: false
+  phase: 4
+  order: 2
+
+inputs:
+  - name: component_docs
+    type: directory
+    required: true
+    path: "brand-output/docs/04-components/"
+  - name: component_html
+    type: directory
+    required: true
+    path: "brand-output/components/"
+  - name: tokens_css
+    type: file
+    required: true
+    path: "brand-output/tokens/tokens.css"
+
+outputs:
+  - name: audit_report
+    type: file
+    format: markdown
+    path: "brand-output/docs/04-components/audit-report.md"
+
+steps:
+  - id: audit-tokens
+    action: verify-token-usage
+    description: |
+      Scan all component HTML/CSS for:
+      - Hardcoded color values (should be var(--color-*))
+      - Hardcoded spacing values (should be var(--spacing-*))
+      - Hardcoded font values (should be var(--font-*))
+      - Report violations with file and line
+
+  - id: audit-a11y
+    action: verify-accessibility
+    description: |
+      Check all components for WCAG AA:
+      - Color contrast ratios (4.5:1 text, 3:1 UI)
+      - ARIA roles and labels on interactive elements
+      - Keyboard navigability (tabindex, focus states)
+      - Alt text on images
+      - Form label associations
+      - Report violations by component
+
+  - id: audit-responsive
+    action: verify-responsiveness
+    description: |
+      Check responsive behavior:
+      - Components use breakpoint tokens
+      - No horizontal overflow on mobile
+      - Touch targets >= 44x44px on mobile
+      - Text remains readable at all breakpoints
+
+  - id: audit-dark-mode
+    action: verify-dark-mode
+    description: |
+      Check dark mode implementation:
+      - All colors use token with dark variant
+      - No white-on-white or black-on-black
+      - Shadows adapted for dark backgrounds
+      - Images/icons work on dark backgrounds
+
+  - id: compile-report
+    action: generate-audit-report
+    depends_on: [audit-tokens, audit-a11y, audit-responsive, audit-dark-mode]
+    description: |
+      Generate audit-report.md with:
+      - Summary score (pass/fail per category)
+      - Token usage: X% coverage
+      - A11y: X violations (critical/major/minor)
+      - Responsive: pass/fail per component
+      - Dark mode: pass/fail per component
+      - Remediation recommendations
+
+error_handling:
+  on_validation_error: "Component library required. Run build-components first."
+  retry_count: 1

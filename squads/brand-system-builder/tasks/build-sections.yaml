@@ -1,0 +1,144 @@
+name: build-sections
+version: 1.0.0
+description: "Build pre-built marketing sections using design tokens and brand config. Creates reusable section patterns for landing pages and marketing sites."
+agent: component-builder
+
+metadata:
+  elicit: false
+  phase: 5
+  order: 1
+
+inputs:
+  - name: tokens_css
+    type: file
+    required: true
+    path: "brand-output/tokens/tokens.css"
+  - name: brand_config
+    type: file
+    required: true
+    path: "brand-config.yaml"
+  - name: component_html
+    type: directory
+    required: true
+    path: "brand-output/components/"
+
+outputs:
+  - name: sections_html
+    type: file
+    format: html
+    path: "brand-output/preview/sections.html"
+  - name: sections_doc
+    type: file
+    format: markdown
+    path: "brand-output/docs/04-components/sections.md"
+
+steps:
+  - id: read-brand-config
+    action: load-config
+    description: |
+      Read brand-config.yaml to extract:
+      - Brand name, tagline, logo for header/nav
+      - Colors and typography for token-based styling
+      - Personas for tailoring section copy
+      - Pages list for navigation links
+
+  - id: build-hero-sections
+    action: create-section
+    depends_on: [read-brand-config]
+    description: |
+      Build hero section variants:
+      - Centered hero with headline + CTA
+      - Split hero (text left, image right)
+      - Video/image background hero
+      - Minimal hero (text only)
+      All using brand tokens for colors, typography, spacing.
+
+  - id: build-stats-section
+    action: create-section
+    depends_on: [read-brand-config]
+    description: |
+      Build stats/metrics section:
+      - Counter cards with icon + number + label
+      - Animated count-up effect
+      - Grid layout (3-4 columns, responsive)
+
+  - id: build-services-section
+    action: create-section
+    depends_on: [read-brand-config]
+    description: |
+      Build services/features section:
+      - Icon + title + description cards
+      - Grid layout with hover effects
+      - Alternating background (dark/cream)
+
+  - id: build-pricing-section
+    action: create-section
+    depends_on: [read-brand-config]
+    description: |
+      Build pricing section:
+      - Tier comparison cards (3 tiers)
+      - Highlighted "popular" tier
+      - Feature checklist per tier
+      - CTA button per tier
+
+  - id: build-faq-section
+    action: create-section
+    depends_on: [read-brand-config]
+    description: |
+      Build FAQ section:
+      - Accordion-based Q&A
+      - Smooth expand/collapse animation
+      - Category grouping (optional)
+
+  - id: build-testimonial-section
+    action: create-section
+    depends_on: [read-brand-config]
+    description: |
+      Build testimonial section:
+      - Quote card with avatar + name + role
+      - Grid or carousel layout
+      - Star rating (optional)
+
+  - id: build-cta-section
+    action: create-section
+    depends_on: [read-brand-config]
+    description: |
+      Build CTA sections:
+      - Simple CTA (headline + button)
+      - Newsletter CTA (with email input)
+      - Split CTA (text + image)
+      - Full-width gradient CTA
+
+  - id: build-problem-solution
+    action: create-section
+    depends_on: [read-brand-config]
+    description: |
+      Build problem/solution section:
+      - Before/after comparison
+      - Pain points list → solution benefits
+      - Uses brandscript narrative
+
+  - id: build-footer-section
+    action: create-section
+    depends_on: [read-brand-config]
+    description: |
+      Build footer variants:
+      - Multi-column with links
+      - Simple with copyright + social
+      - With newsletter signup
+      - Brand logo + tagline
+
+  - id: assemble-sections-page
+    action: compile-html
+    depends_on: [build-hero-sections, build-stats-section, build-services-section, build-pricing-section, build-faq-section, build-testimonial-section, build-cta-section, build-problem-solution, build-footer-section]
+    description: |
+      Compile all sections into sections.html:
+      - Include navigation header with brand logo
+      - Each section type in its own showcase area
+      - Dark/cream alternating backgrounds
+      - Responsive layout
+      - All styling from design tokens (zero hardcoded values)
+
+error_handling:
+  on_validation_error: "Design tokens and brand config required. Run Phases 1-4 first."
+  retry_count: 1
