@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fechar Semana"
+  short_description: "Transforma evidências da semana em fechamento"
+  default_prompt: "Use $fechar-semana para fechar minha semana com evidências, pendências e aprendizados."

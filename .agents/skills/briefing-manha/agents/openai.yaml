@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefing da manhã"
+  short_description: "Transforme contexto em prioridades para o dia"
+  default_prompt: "Use $briefing-manha para gerar o briefing de hoje somente com as fontes disponíveis."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Consultar o OS"
+  short_description: "Responda com evidências do contexto local"
+  default_prompt: "Use $consultar para responder com evidências do OS e declarar as lacunas."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Iniciar o OS"
+  short_description: "Configure e retome o OS Head de IA"
+  default_prompt: "Use $iniciar para conduzir a primeira ativação completa do OS."

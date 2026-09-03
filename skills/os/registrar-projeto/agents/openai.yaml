@@ -1,0 +1,4 @@
+interface:
+  display_name: "Registrar projeto"
+  short_description: "Relacione um projeto real ao OS"
+  default_prompt: "Use $registrar-projeto para registrar ou atualizar um projeto real no OS."

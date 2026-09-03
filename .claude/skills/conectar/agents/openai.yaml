@@ -1,0 +1,4 @@
+interface:
+  display_name: "Conectar fonte"
+  short_description: "Configure conexões com segurança e fallback"
+  default_prompt: "Use $conectar para conectar uma fonte ao OS com segurança, prova local e fallback manual."

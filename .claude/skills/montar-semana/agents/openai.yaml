@@ -1,0 +1,4 @@
+interface:
+  display_name: "Montar Semana"
+  short_description: "Monta uma semana realista a partir do contexto"
+  default_prompt: "Use $montar-semana para planejar minha semana com prioridades, agenda e capacidade real."

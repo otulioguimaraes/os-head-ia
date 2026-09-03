@@ -1,0 +1,4 @@
+interface:
+  display_name: "Criar rotina"
+  short_description: "Documente e teste um fluxo recorrente"
+  default_prompt: "Use $criar-rotina para transformar esta atividade recorrente em uma rotina DRAFT testável."

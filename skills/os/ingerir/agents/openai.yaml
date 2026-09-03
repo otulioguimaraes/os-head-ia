@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ingerir fonte"
+  short_description: "Preserve uma fonte e organize o contexto"
+  default_prompt: "Use $ingerir para preservar esta fonte e criar uma nota rastreável."

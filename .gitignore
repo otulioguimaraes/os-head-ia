@@ -1,0 +1,22 @@
+# Credenciais e ambiente
+.env
+.env.*
+!.env.example
+.secrets/
+secrets/
+*.pem
+*.key
+
+# Artefatos de sistema e editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# As cópias em .agents/skills e .claude/skills são geradas, mas permanecem no
+# pacote e no repositório para que os atalhos funcionem na primeira abertura.
+# Edite somente skills/os/ e execute o sincronizador antes de publicar.
+
+# Saídas de build
+dist/*.zip
+dist/*.sha256

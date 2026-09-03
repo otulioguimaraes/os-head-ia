@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gerenciar sessão"
+  short_description: "Retome ou encerre sem perder contexto"
+  default_prompt: "Use $sessao para retomar ou encerrar esta sessão sem perder o contexto."
