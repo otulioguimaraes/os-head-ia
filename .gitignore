@@ -9,6 +9,8 @@ secrets/
 
 # Artefatos de sistema e editores
 .DS_Store
+__pycache__/
+*.pyc
 Thumbs.db
 .idea/
 .vscode/

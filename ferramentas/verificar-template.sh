@@ -46,6 +46,11 @@ if grep -RIlE --exclude-dir=dist --exclude='verificar-template.sh' '/Users/[^/]+
   exit 1
 fi
 
+if find "$OS_ROOT" -type f \( -name '*.pyc' -o -path '*/__pycache__/*' \) -not -path '*/dist/*' -print -quit | grep -q .; then
+  echo "ERRO: há cache Python no pacote." >&2
+  exit 1
+fi
+
 bash -n "$OS_ROOT/skills/sync-skills.sh"
 bash -n "$OS_ROOT/ferramentas/bootstrap.sh"
 bash -n "$OS_ROOT/ferramentas/doctor.sh"
