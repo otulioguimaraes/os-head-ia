@@ -20,30 +20,30 @@ foreach ($File in $RequiredFiles) {
 }
 
 $ProductExpected = 15
-$SkillCount = @(Get-ChildItem -Path (Join-Path $OsRoot "skills\os") -Directory -ErrorAction SilentlyContinue | Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") -PathType Leaf }).Count
+$SkillCount = @(Get-ChildItem -Force -Path (Join-Path $OsRoot "skills\os") -Directory -ErrorAction SilentlyContinue | Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") -PathType Leaf }).Count
 if ($SkillCount -eq $ProductExpected) { Write-Ok "$ProductExpected skills do produto encontradas" }
 else { Write-Failure "esperava $ProductExpected skills do produto; encontrei $SkillCount" }
 
-$UserSkillDirs = @(Get-ChildItem -Path (Join-Path $OsRoot "skills\minhas") -Directory -ErrorAction SilentlyContinue | Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") -PathType Leaf })
+$UserSkillDirs = @(Get-ChildItem -Force -Path (Join-Path $OsRoot "skills\minhas") -Directory -ErrorAction SilentlyContinue | Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") -PathType Leaf })
 Write-Ok "$($UserSkillDirs.Count) skill(s) suas em skills\minhas\"
 
 function Get-SkillManifestFromDirs($Dirs) {
     return @($Dirs | ForEach-Object {
         $Dir = $_
-        Get-ChildItem -Path $Dir.FullName -File -Recurse | ForEach-Object {
+        Get-ChildItem -Force -Path $Dir.FullName -File -Recurse | ForEach-Object {
             $Relative = $Dir.Name + "/" + $_.FullName.Substring($Dir.FullName.Length).TrimStart([char[]]@('\', '/')).Replace('\', '/')
             "$Relative|$((Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash)"
         }
     } | Sort-Object)
 }
 
-$ProductSkillDirs = @(Get-ChildItem -Path (Join-Path $OsRoot "skills\os") -Directory -ErrorAction SilentlyContinue | Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") -PathType Leaf })
+$ProductSkillDirs = @(Get-ChildItem -Force -Path (Join-Path $OsRoot "skills\os") -Directory -ErrorAction SilentlyContinue | Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") -PathType Leaf })
 $ExpectedDirs = @($ProductSkillDirs + $UserSkillDirs)
 $TotalExpected = $ExpectedDirs.Count
 $ExpectedManifest = Get-SkillManifestFromDirs $ExpectedDirs
 
 function Test-InstalledSkills($Label, $TargetRoot) {
-    $InstalledDirs = @(Get-ChildItem -Path $TargetRoot -Directory -ErrorAction SilentlyContinue | Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") -PathType Leaf })
+    $InstalledDirs = @(Get-ChildItem -Force -Path $TargetRoot -Directory -ErrorAction SilentlyContinue | Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") -PathType Leaf })
     if ($InstalledDirs.Count -ne $TotalExpected) {
         Write-Failure "$Label`: esperava $TotalExpected skills instaladas; encontrei $($InstalledDirs.Count). Rode skills\sync-skills.ps1"
         return
@@ -81,7 +81,7 @@ try {
     Write-Failure "pasta sem permissao de escrita"
 }
 
-$Sensitive = Get-ChildItem -Path $OsRoot -File -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -eq ".env" -or $_.Extension -in @(".pem", ".key") }
+$Sensitive = Get-ChildItem -Force -Path $OsRoot -File -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -eq ".env" -or $_.Extension -in @(".pem", ".key") }
 if ($Sensitive.Count -gt 0) { Write-WarningResult "ha arquivo potencialmente sensivel; confirme que esta ignorado pelo Git" }
 else { Write-Ok "nenhum arquivo sensivel comum detectado" }
 

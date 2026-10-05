@@ -50,14 +50,32 @@ if [[ -d "$USER_DIR" ]]; then
   done
 fi
 
+# Sincroniza NO LUGAR, sem apagar e recriar a pasta inteira. Apagar e recriar numa
+# pasta sincronizada (iCloud "Mesa e Documentos", OneDrive, Dropbox) gera cópias de
+# conflito como "sessao 2", que quebram o diagnóstico.
 sync_target() {
-  local target_root="$1"
-  if [[ -d "$target_root" ]] && diff -qr "$MERGED" "$target_root" >/dev/null 2>&1; then
-    return
-  fi
-  rm -rf -- "$target_root"
+  local target_root="$1" entry name skill_dir
   mkdir -p "$target_root"
-  cp -R "$MERGED/." "$target_root/"
+  # 1) remove o que não é skill atual (inclui cópias de conflito "nome 2")
+  for entry in "$target_root"/* "$target_root"/.[!.]*; do
+    [[ -e "$entry" || -L "$entry" ]] || continue
+    name="$(basename "$entry")"
+    [[ -d "$MERGED/$name" ]] || rm -rf -- "$entry"
+  done
+  # 2) atualiza cada skill arquivo a arquivo
+  for skill_dir in "$MERGED"/*; do
+    [[ -d "$skill_dir" ]] || continue
+    name="$(basename "$skill_dir")"
+    if command -v rsync >/dev/null 2>&1; then
+      rsync -rlt --delete --inplace "$skill_dir/" "$target_root/$name/"
+    else
+      mkdir -p "$target_root/$name"
+      cp -R "$skill_dir/." "$target_root/$name/"
+      (cd "$target_root/$name" && find . -mindepth 1 -depth | while IFS= read -r rel; do
+        [[ -e "$skill_dir/$rel" ]] || rm -rf -- "$target_root/$name/$rel"
+      done)
+    fi
+  done
 }
 
 sync_target "$OS_ROOT/.agents/skills"

@@ -13,7 +13,7 @@ set -euo pipefail
 #   conexoes/ (exceto MODELO.md) skills/minhas/
 # Skills que VOCÊ criou (em skills/os/, .claude/skills/ ou .agents/skills/) são resgatadas
 # para skills/minhas/. Arquivos extras seus dentro de pastas do produto ficam onde estão.
-# Todo arquivo do produto que for trocado é MOVIDO antes para _arquivo/atualizacao-<data>/.
+# Todo arquivo do produto que for trocado é COPIADO antes para _arquivo/atualizacao-<data>/ e sobrescrito no lugar.
 
 NEW_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
@@ -162,12 +162,15 @@ fi
 
 if [[ ${#CHANGED[@]} -gt 0 ]]; then
   for rel in "${CHANGED[@]}"; do
+    # copia o antigo para o backup e sobrescreve NO LUGAR (sem apagar e recriar:
+    # em pasta sincronizada com iCloud/OneDrive isso gera cópias de conflito "nome 2")
     if [[ -e "$TARGET/$rel" ]]; then
       mkdir -p "$BACKUP/$(dirname "$rel")"
-      mv "$TARGET/$rel" "$BACKUP/$rel"
+      cp -p "$TARGET/$rel" "$BACKUP/$rel"
     fi
     mkdir -p "$TARGET/$(dirname "$rel")"
-    cp "$NEW_ROOT/$rel" "$TARGET/$rel"
+    cat "$NEW_ROOT/$rel" > "$TARGET/$rel"
+    [[ -x "$NEW_ROOT/$rel" ]] && chmod +x "$TARGET/$rel"
   done
 fi
 chmod +x "$TARGET"/skills/*.sh "$TARGET"/ferramentas/*.sh 2>/dev/null || true

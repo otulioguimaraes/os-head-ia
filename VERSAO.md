@@ -1,8 +1,12 @@
 # Versão do OS Head de IA
 
-- versão: `0.6.1`
+- versão: `0.6.2`
 - data: `2026-10-06`
 - estágio: piloto da Formação Head de IA
+
+## Mudanças da versão 0.6.2
+
+- **conserto para pastas sincronizadas (iCloud "Mesa e Documentos", OneDrive, Dropbox):** a sincronização de skills e a atualização deixam de apagar e recriar pastas e passam a atualizar arquivo por arquivo, no lugar. Apagar e recriar gerava cópias de conflito como `sessao 2`, que derrubavam o diagnóstico. A sincronização também remove essas cópias quando já existem.
 
 ## Mudanças da versão 0.6.1
 

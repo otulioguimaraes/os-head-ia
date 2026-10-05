@@ -93,14 +93,14 @@ function Get-Fingerprint {
 $Rescue = [ordered]@{}
 $OsSkills = Join-Path $Target "skills\os"
 if (Test-Path -LiteralPath $OsSkills -PathType Container) {
-    foreach ($Sd in (Get-ChildItem -LiteralPath $OsSkills -Directory)) {
+    foreach ($Sd in (Get-ChildItem -Force -LiteralPath $OsSkills -Directory)) {
         if (-not (Test-ProductSkill $Sd.Name) -and -not (Test-Path (Join-Path $Target "skills\minhas\$($Sd.Name)")) -and -not $Rescue.Contains($Sd.Name)) { $Rescue[$Sd.Name] = $Sd.FullName }
     }
 }
 foreach ($Gen in @(".claude\skills", ".agents\skills")) {
     $GenDir = Join-Path $Target $Gen
     if (-not (Test-Path -LiteralPath $GenDir -PathType Container)) { continue }
-    foreach ($Sd in (Get-ChildItem -LiteralPath $GenDir -Directory)) {
+    foreach ($Sd in (Get-ChildItem -Force -LiteralPath $GenDir -Directory)) {
         if (-not (Test-Path (Join-Path $Sd.FullName "SKILL.md") -PathType Leaf)) { continue }
         if (-not (Test-ProductSkill $Sd.Name) -and -not (Test-Path (Join-Path $Target "skills\minhas\$($Sd.Name)")) -and -not $Rescue.Contains($Sd.Name)) { $Rescue[$Sd.Name] = $Sd.FullName }
     }
@@ -177,10 +177,11 @@ foreach ($Name in @($Rescue.Keys)) {
 
 foreach ($Rel in $Changed) {
     $Dst = Join-Path $Target $Rel
+    # copia o antigo para o backup e sobrescreve NO LUGAR (OneDrive/iCloud geram "nome 2" ao apagar e recriar)
     if (Test-Path -LiteralPath $Dst) {
         $Bk = Join-Path $Backup $Rel
         New-Item -ItemType Directory -Force -Path (Split-Path -Parent $Bk) | Out-Null
-        Move-Item -LiteralPath $Dst -Destination $Bk
+        Copy-Item -Force -LiteralPath $Dst -Destination $Bk
     }
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $Dst) | Out-Null
     Copy-Item -Force -LiteralPath (Join-Path $NewRoot $Rel) -Destination $Dst

@@ -26,13 +26,13 @@ try {
     $ProductCount = 0
     $UserCount = 0
 
-    foreach ($SkillDir in (Get-ChildItem -Path $ProductDir -Directory)) {
+    foreach ($SkillDir in (Get-ChildItem -Force -Path $ProductDir -Directory)) {
         Copy-Item -Recurse -Force -LiteralPath $SkillDir.FullName -Destination (Join-Path $Merged $SkillDir.Name)
         $ProductCount++
     }
 
     if (Test-Path $UserDir -PathType Container) {
-        foreach ($SkillDir in (Get-ChildItem -Path $UserDir -Directory)) {
+        foreach ($SkillDir in (Get-ChildItem -Force -Path $UserDir -Directory)) {
             if (-not (Test-Path (Join-Path $SkillDir.FullName "SKILL.md") -PathType Leaf)) {
                 Write-Warning "skills\minhas\$($SkillDir.Name) nao tem SKILL.md; ignorada."
                 continue
@@ -46,28 +46,34 @@ try {
         }
     }
 
-    function Get-TreeManifest([string]$Root) {
-        if (-not (Test-Path $Root -PathType Container)) { return @() }
-        $Full = (Resolve-Path -LiteralPath $Root).Path
-        return @(Get-ChildItem -Path $Full -File -Recurse | ForEach-Object {
-            $Relative = $_.FullName.Substring($Full.Length).TrimStart([char[]]@('\', '/'))
-            "$Relative|$((Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash)"
-        } | Sort-Object)
-    }
 
-    $MergedManifest = Get-TreeManifest $Merged
-
+    # Sincroniza NO LUGAR, sem apagar e recriar a pasta inteira. Apagar e recriar numa
+    # pasta sincronizada (OneDrive, iCloud, Dropbox) gera copias de conflito como "sessao 2".
     foreach ($TargetRoot in @((Join-Path $OsRoot ".agents\skills"), (Join-Path $OsRoot ".claude\skills"))) {
-        $TargetManifest = Get-TreeManifest $TargetRoot
-        if ((Test-Path $TargetRoot) -and ((@($MergedManifest) -join "`n") -eq (@($TargetManifest) -join "`n"))) {
-            continue
-        }
-        if (Test-Path $TargetRoot) {
-            Remove-Item -Recurse -Force -LiteralPath $TargetRoot
-        }
         New-Item -ItemType Directory -Force -Path $TargetRoot | Out-Null
-        foreach ($Item in (Get-ChildItem -Path $Merged -Directory)) {
-            Copy-Item -Recurse -Force -LiteralPath $Item.FullName -Destination (Join-Path $TargetRoot $Item.Name)
+        foreach ($Entry in @(Get-ChildItem -LiteralPath $TargetRoot -Force)) {
+            if (-not (Test-Path (Join-Path $Merged $Entry.Name) -PathType Container)) {
+                Remove-Item -Recurse -Force -LiteralPath $Entry.FullName
+            }
+        }
+        foreach ($Item in (Get-ChildItem -Force -Path $Merged -Directory)) {
+            $Dest = Join-Path $TargetRoot $Item.Name
+            New-Item -ItemType Directory -Force -Path $Dest | Out-Null
+            $SrcFull = (Resolve-Path -LiteralPath $Item.FullName).Path
+            foreach ($F in @(Get-ChildItem -LiteralPath $SrcFull -Recurse -Force)) {
+                $Rel = $F.FullName.Substring($SrcFull.Length).TrimStart([char[]]@('\', '/'))
+                $To = Join-Path $Dest $Rel
+                if ($F.PSIsContainer) { New-Item -ItemType Directory -Force -Path $To | Out-Null }
+                else {
+                    $Same = (Test-Path -LiteralPath $To -PathType Leaf) -and ((Get-FileHash -LiteralPath $F.FullName).Hash -eq (Get-FileHash -LiteralPath $To).Hash)
+                    if (-not $Same) { Copy-Item -Force -LiteralPath $F.FullName -Destination $To }
+                }
+            }
+            $DestFull = (Resolve-Path -LiteralPath $Dest).Path
+            foreach ($G in @(Get-ChildItem -LiteralPath $DestFull -Recurse -Force | Sort-Object { $_.FullName.Length } -Descending)) {
+                $Rel = $G.FullName.Substring($DestFull.Length).TrimStart([char[]]@('\', '/'))
+                if (-not (Test-Path -LiteralPath (Join-Path $SrcFull $Rel))) { Remove-Item -Recurse -Force -LiteralPath $G.FullName }
+            }
         }
     }
 
