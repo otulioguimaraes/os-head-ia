@@ -14,7 +14,7 @@ Referência oficial: <https://help.openai.com/en/articles/11369540-getting-start
 2. Entre com sua conta ChatGPT.
 3. Selecione **Codex** no menu do aplicativo.
 4. Crie uma nova tarefa local e escolha **Abrir pasta**.
-5. Selecione a pasta descompactada `os-head-ia-v0`.
+5. Selecione a pasta descompactada `os-head-ia-v0.6`.
 6. Autorize somente o acesso necessário a essa pasta.
 7. Envie a mensagem de primeiro acesso disponível em `COMECE-AQUI.md`.
 
@@ -49,7 +49,7 @@ claude doctor
 Depois:
 
 ```bash
-cd "/caminho/para/os-head-ia-v0"
+cd "/caminho/para/os-head-ia-v0.6"
 claude
 ```
 

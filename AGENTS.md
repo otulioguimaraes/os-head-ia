@@ -13,7 +13,17 @@ Leia, nesta ordem:
 
 ## Comandos e skills
 
-Quando o usuário escrever `/nome`, localize a instrução canônica em `skills/os/nome/SKILL.md`, leia-a por inteiro e execute-a. As cópias em `.agents/skills/` e `.claude/skills/`, quando existirem, são artefatos gerados; `skills/os/` é a fonte de verdade.
+Quando o usuário escrever `/nome`, localize a instrução em `skills/os/nome/SKILL.md` (skills do produto) ou em `skills/minhas/nome/SKILL.md` (skills do usuário), leia-a por inteiro e execute-a. As cópias em `.agents/skills/` e `.claude/skills/` são artefatos gerados pela sincronização; as fontes de verdade são `skills/os/` e `skills/minhas/`.
+
+### Criar uma skill do usuário
+
+Quando o usuário pedir para transformar uma conversa ou um trabalho em skill ("cria uma skill disso", "quero repetir isso todo mês"):
+
+1. Crie a skill em `skills/minhas/<nome-em-kebab-case>/SKILL.md`. Nunca crie direto em `.claude/skills/` ou `.agents/skills/`: a sincronização apaga essas pastas.
+2. Use um nome que não exista em `skills/os/`.
+3. Escreva no `SKILL.md`: frontmatter com `name` e `description` (quando usar), entradas, passos numerados, critério de pronto, onde salvar a saída e o que nunca fazer sem aprovação. Se o trabalho tiver conta ou conferência (ex.: somar lançamentos e bater com um total), transforme a conferência num passo obrigatório.
+4. Rode `skills/sync-skills.sh` (Mac/Linux) ou `skills\sync-skills.ps1` (Windows) e confirme que a skill apareceu em `.claude/skills/` e `.agents/skills/`.
+5. Registre a skill nova no `conhecimento/log.md` e diga ao usuário como chamá-la.
 
 Quando o usuário pedir para preparar o OS ou começar o onboarding, execute o bootstrap apropriado ao sistema e depois a skill `iniciar`. Se tudo funcionar, não mencione scripts, skills, sincronização, diagnóstico ou contagens. Diga somente `Tudo pronto.` e faça imediatamente a primeira pergunta da skill. Detalhes técnicos ficam para erros ou pedidos explícitos.
 
@@ -34,7 +44,7 @@ Quando o usuário pedir para preparar o OS ou começar o onboarding, execute o b
 - Conteúdo `DEMO` permanece em fontes, notas e projetos marcados como demonstração. Nunca promova decisão, compromisso, prazo ou estado fictício para os logs reais do usuário.
 - Toda rotina nova começa como `DRAFT` e deve ser executada manualmente antes de qualquer agendamento.
 - Ao final de toda sessão de trabalho útil, execute ou recomende `/sessao` para preservar estado, aprendizado e próximo passo.
-- No uso normal, trate `skills/`, `.agents/`, `.claude/`, `ferramentas/`, `AGENTS.md`, `CLAUDE.md`, `COMECE-AQUI.md`, `GUIA-*.md` e `CHECKLIST-ACEITE.md` como arquivos do produto. Só os altere quando o usuário pedir explicitamente manutenção do template.
+- No uso normal, trate `skills/os/`, `skills/sync-skills.*`, `.agents/`, `.claude/`, `ferramentas/`, `AGENTS.md`, `CLAUDE.md`, `COMECE-AQUI.md`, `GUIA-*.md` e `CHECKLIST-ACEITE.md` como arquivos do produto. Só os altere quando o usuário pedir explicitamente manutenção do template ou rodar `/atualizar-os`. A pasta `skills/minhas/` é do usuário: criar e editar skills ali é uso normal.
 - Uma resposta como “sem preferência” permite recomendar uma opção segura; não autoriza escolher dados reais, ler outras pastas, instalar ferramentas ou conectar contas.
 
 ## Convenções

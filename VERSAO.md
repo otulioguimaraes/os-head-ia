@@ -1,10 +1,21 @@
 # Versão do OS Head de IA
 
-- versão: `0.5.0`
-- data: `2026-09-03`
+- versão: `0.6.0`
+- data: `2026-10-06`
 - estágio: piloto da Formação Head de IA
 
-## Mudanças desta versão
+## Mudanças desta versão (0.6.0 — Encontro 4)
+
+- **suas skills ganham pasta própria:** `skills/minhas/<nome>/`. A sincronização copia as skills do produto e as suas para o Claude e o Codex. Antes, uma skill criada direto em `.claude/skills/` sumia na sincronização seguinte;
+- `AGENTS.md` ensina o modelo a criar skill do usuário no lugar certo e a sincronizar;
+- nova skill `/atualizar-os` com os scripts `ferramentas/atualizar-os.sh` e `.ps1`: atualizam uma instalação antiga trocando só arquivos do produto, movem os antigos para `_arquivo/` e conferem que a impressão digital dos dados do usuário não mudou;
+- nova skill `/conectar-treg`: objetivo do usuário → documentação atual → cadastro feito pelo usuário (US$ 1 de crédito na primeira equipe) → primeira chamada com preço aprovado → registro sem chave;
+- `/criar-rotina` ganhou a etapa de escolha do nível de autonomia, com o novo guia `guias/rotinas/niveis-de-autonomia.md` (nomes conferidos em 2026-10-05: Routines do Claude Desktop, Scheduled tasks do ChatGPT desktop app);
+- nova pasta `exercicios/encontro-4/` com reunião DEMO, duas faturas DEMO (conferíveis ao centavo) e o roteiro dos quatro exercícios;
+- diagnóstico, verificador e empacotador passam a esperar quinze skills do produto.
+
+## Mudanças da versão 0.5.0
+
 
 - nova skill `/mapear-fontes`, com entrevista não técnica, separação pessoal/profissional, priorização e primeiro teste seguro;
 - onboarding agora recomenda o mapa de fontes depois da primeira vitória, antes de ampliar conexões;

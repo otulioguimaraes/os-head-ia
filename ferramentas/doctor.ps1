@@ -19,28 +19,38 @@ foreach ($File in $RequiredFiles) {
     else { Write-Failure "$File ausente" }
 }
 
-$SkillCount = (Get-ChildItem -Path (Join-Path $OsRoot "skills\os") -Filter "SKILL.md" -File -Recurse -ErrorAction SilentlyContinue).Count
-if ($SkillCount -eq 13) { Write-Ok "13 skills canonicas encontradas" }
-else { Write-Failure "esperava 13 skills; encontrei $SkillCount" }
+$ProductExpected = 15
+$SkillCount = @(Get-ChildItem -Path (Join-Path $OsRoot "skills\os") -Directory -ErrorAction SilentlyContinue | Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") -PathType Leaf }).Count
+if ($SkillCount -eq $ProductExpected) { Write-Ok "$ProductExpected skills do produto encontradas" }
+else { Write-Failure "esperava $ProductExpected skills do produto; encontrei $SkillCount" }
 
-function Get-SkillManifest($Root) {
-    if (-not (Test-Path $Root -PathType Container)) { return @() }
-    return @(Get-ChildItem -Path $Root -File -Recurse | ForEach-Object {
-        $Relative = $_.FullName.Substring($Root.Length).TrimStart([char[]]@('\', '/'))
-        "$Relative|$((Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash)"
+$UserSkillDirs = @(Get-ChildItem -Path (Join-Path $OsRoot "skills\minhas") -Directory -ErrorAction SilentlyContinue | Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") -PathType Leaf })
+Write-Ok "$($UserSkillDirs.Count) skill(s) suas em skills\minhas\"
+
+function Get-SkillManifestFromDirs($Dirs) {
+    return @($Dirs | ForEach-Object {
+        $Dir = $_
+        Get-ChildItem -Path $Dir.FullName -File -Recurse | ForEach-Object {
+            $Relative = $Dir.Name + "/" + $_.FullName.Substring($Dir.FullName.Length).TrimStart([char[]]@('\', '/')).Replace('\', '/')
+            "$Relative|$((Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash)"
+        }
     } | Sort-Object)
 }
 
+$ProductSkillDirs = @(Get-ChildItem -Path (Join-Path $OsRoot "skills\os") -Directory -ErrorAction SilentlyContinue | Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") -PathType Leaf })
+$ExpectedDirs = @($ProductSkillDirs + $UserSkillDirs)
+$TotalExpected = $ExpectedDirs.Count
+$ExpectedManifest = Get-SkillManifestFromDirs $ExpectedDirs
+
 function Test-InstalledSkills($Label, $TargetRoot) {
-    $Count = (Get-ChildItem -Path $TargetRoot -Filter "SKILL.md" -File -Recurse -ErrorAction SilentlyContinue).Count
-    if ($Count -ne 13) {
-        Write-Failure "$Label`: esperava 13 skills instaladas; encontrei $Count. Rode skills\sync-skills.ps1"
+    $InstalledDirs = @(Get-ChildItem -Path $TargetRoot -Directory -ErrorAction SilentlyContinue | Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") -PathType Leaf })
+    if ($InstalledDirs.Count -ne $TotalExpected) {
+        Write-Failure "$Label`: esperava $TotalExpected skills instaladas; encontrei $($InstalledDirs.Count). Rode skills\sync-skills.ps1"
         return
     }
-    $Canonical = Get-SkillManifest (Join-Path $OsRoot "skills\os")
-    $Installed = Get-SkillManifest $TargetRoot
-    if ((Compare-Object -ReferenceObject $Canonical -DifferenceObject $Installed).Count -eq 0) {
-        Write-Ok "$Label`: 13 skills instaladas e sincronizadas"
+    $Installed = Get-SkillManifestFromDirs $InstalledDirs
+    if ((@($ExpectedManifest) -join "`n") -eq (@($Installed) -join "`n")) {
+        Write-Ok "$Label`: $TotalExpected skills instaladas e sincronizadas"
     } else {
         Write-Failure "$Label`: skills instaladas estao desatualizadas. Rode skills\sync-skills.ps1"
     }
@@ -65,7 +75,7 @@ else { Write-WarningResult "Claude Code nao encontrado; use o Codex ou instale d
 try {
     $Probe = Join-Path $OsRoot ".os-head-ia-write-test"
     Set-Content -Path $Probe -Value "ok" -NoNewline
-    Remove-Item -LiteralPath $Probe
+    Remove-Item -Force -LiteralPath $Probe
     Write-Ok "pasta gravavel"
 } catch {
     Write-Failure "pasta sem permissao de escrita"

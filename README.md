@@ -58,7 +58,8 @@ O primeiro ciclo operacional tem três rotinas: briefing da manhã, fechamento s
 - `decisoes/`: decisões com data e justificativa.
 - `rotinas/`: contratos das rotinas recorrentes.
 - `saidas/`: entregáveis, registros diários e ponto de retomada.
-- `skills/`: instruções internas que permitem ao agente conduzir cada rotina.
+- `skills/`: `skills/os/` traz as skills do produto; `skills/minhas/` guarda as que você cria.
+- `exercicios/`: exercícios e arquivos DEMO de cada encontro.
 - `squads/`: papéis, tarefas e checkpoints para construções maiores.
 - `guias/`: instruções humanas, inclusive conexões.
 

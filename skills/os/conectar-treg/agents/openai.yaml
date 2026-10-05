@@ -1,0 +1,4 @@
+interface:
+  display_name: "Conectar a TREG"
+  short_description: "Dados de fora com preço antes de cada chamada"
+  default_prompt: "Use $conectar-treg para conectar este OS à TREG e fazer a primeira chamada com preço aprovado."

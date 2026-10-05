@@ -14,7 +14,9 @@
 | `/criar-rotina` | Desenhar uma rotina repetível e testável | `rotinas/<slug>.md` em estado DRAFT |
 | `/design-system` | Extrair uma marca existente ou conduzir a construção de um sistema visual | `projetos/<slug>/design-system/` |
 
-Você também pode pedir em linguagem natural. Os comandos existem para tornar o procedimento previsível e auditável.
+Você também pode pedir em linguagem natural.
+
+**Suas skills:** quando uma conversa der certo, peça *"crie uma skill para isso"*. Ela nasce em `skills/minhas/<nome>/` e aparece aqui do mesmo jeito. Veja [skills/minhas/README.md](skills/minhas/README.md). Os comandos existem para tornar o procedimento previsível e auditável.
 
 ## Depois da primeira ativação
 
@@ -23,6 +25,11 @@ Você também pode pedir em linguagem natural. Os comandos existem para tornar o
 | `/fechar-semana` | Transformar evidências em avanços, decisões, pendências e aprendizados | `saidas/rotinas/fechamento-semanal/AAAA-Sww.md` |
 | `/montar-semana` | Planejar até três resultados dentro da capacidade real | `saidas/rotinas/montar-semana/AAAA-Sww.md` |
 
-Esses dois comandos ficam fora da primeira tela do onboarding. Eles aparecem depois que o aluno já provou perfil, projeto, fonte, briefing e retomada.
+| `/atualizar-os` | Atualizar este OS para uma versão nova sem tocar nos seus dados | plano de atualização + `_arquivo/atualizacao-<data>/` |
+| `/conectar-treg` | Conectar a TREG (catálogo de APIs com preço por chamada) e fazer a primeira chamada com preço aprovado | registro em `conexoes.md` |
+
+Esses comandos ficam fora da primeira tela do onboarding. Eles aparecem depois que o aluno já provou perfil, projeto, fonte, briefing e retomada.
+
+Exercícios dos encontros: [exercicios/](exercicios/README.md).
 
 Para evoluir o sistema além da primeira ativação, leia [GUIA-COMPLETO-DO-OS.md](GUIA-COMPLETO-DO-OS.md). Ele inclui segundo cérebro, Agentic OS, conexões, skills e rotinas.

@@ -35,4 +35,8 @@ if find "$OS_ROOT/skills/os" -mindepth 1 -maxdepth 1 -type d -name modo-publico 
   fail "a skill interna modo-publico não pode entrar no pacote do aluno."
 fi
 
+if find "$OS_ROOT/skills/minhas" -mindepth 1 -maxdepth 1 -type d -print -quit 2>/dev/null | grep -q .; then
+  fail "há skills de usuário em skills/minhas/ no template de distribuição."
+fi
+
 echo "OK: template limpo e sem dados de uma instância real."

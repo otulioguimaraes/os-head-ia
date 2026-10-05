@@ -9,7 +9,7 @@ REQUIRED=(
   0-eu/perfil.md 0-eu/prioridades.md projetos/README.md
   conhecimento/index.md conhecimento/log.md conhecimento/processados.md
   decisoes/log.md conexoes.md rotinas/modelos/contrato.md saidas/RETOMAR.md
-  skills/sync-skills.sh ferramentas/bootstrap.sh ferramentas/bootstrap.ps1
+  skills/sync-skills.sh skills/sync-skills.ps1 skills/minhas/README.md ferramentas/bootstrap.sh ferramentas/bootstrap.ps1
   ferramentas/doctor.sh ferramentas/doctor.ps1 ferramentas/verificar-template-limpo.sh
 )
 
@@ -17,7 +17,7 @@ for item in "${REQUIRED[@]}"; do
   [[ -f "$OS_ROOT/$item" ]] || { echo "ERRO: arquivo obrigatório ausente: $item" >&2; exit 1; }
 done
 
-EXPECTED_SKILLS=(iniciar registrar-projeto ingerir consultar sessao conectar mapear-fontes search-connectors briefing-manha criar-rotina fechar-semana montar-semana design-system)
+EXPECTED_SKILLS=(iniciar registrar-projeto ingerir consultar sessao conectar mapear-fontes search-connectors briefing-manha criar-rotina fechar-semana montar-semana design-system atualizar-os conectar-treg)
 for skill in "${EXPECTED_SKILLS[@]}"; do
   [[ -f "$OS_ROOT/skills/os/$skill/SKILL.md" ]] || { echo "ERRO: skill ausente: $skill" >&2; exit 1; }
 done

@@ -427,7 +427,7 @@ Antes de criar arquivos, pergunte em um único bloco:
 4. o que ela nunca pode fazer;
 5. quais referências ou modelos já existem.
 
-Depois proponha um contrato pequeno. Use SKILL.md como instrução ou roteador e coloque referências condicionais em arquivos separados. Não dê permissões além da tarefa. Crie primeiro na fonte canônica skills/os/, valide e rode um teste real. Só então sincronize para Codex e Claude.
+Depois proponha um contrato pequeno. Use SKILL.md como instrução ou roteador e coloque referências condicionais em arquivos separados. Não dê permissões além da tarefa. Crie a skill em skills/minhas/<nome>/ (as skills do produto ficam em skills/os/ e não devem ser editadas), valide e rode um teste real. Depois rode a sincronização para ela aparecer no Codex e no Claude.
 ```
 
 ## 25. Skills simples e skills com referências
@@ -862,7 +862,7 @@ Decidir, com evidências, se o próximo investimento é conexão, memória, roti
 # APÊNDICE A · ESTRUTURA DO OS
 
 ```text
-os-head-ia-v0/
+os-head-ia-v0.6/
 ├── 0-eu/                 perfil, prioridades e modo de trabalho
 ├── empresa/              contexto institucional
 ├── projetos/             fichas e referências dos projetos

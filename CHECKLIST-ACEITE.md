@@ -6,7 +6,7 @@
 - [ ] Não contém caminhos pessoais, credenciais ou dados reais do professor.
 - [ ] `COMECE-AQUI.md` é visível na raiz.
 - [ ] Estrutura funciona em pasta com espaços no nome.
-- [ ] ZIP contém treze skills em `.agents/skills/` e treze em `.claude/skills/`.
+- [ ] ZIP contém quinze skills em `.agents/skills/` e quinze em `.claude/skills/`.
 - [ ] ZIP contém o squad `squads/brand-system-builder/` completo.
 - [ ] ZIP do aluno não contém a skill interna `/modo-publico`.
 
@@ -14,7 +14,7 @@
 
 - [ ] Codex lê `AGENTS.md` e executa a skill canônica.
 - [ ] Claude Code lê `CLAUDE.md` e executa a skill canônica.
-- [ ] Sincronização gera treze skills nos dois destinos locais e remove cópias obsoletas.
+- [ ] Sincronização gera as quinze skills do produto mais as de `skills/minhas/` nos dois destinos locais e remove cópias obsoletas.
 - [ ] Diagnóstico falha de forma acionável quando uma pasta de skills instaladas está ausente ou dessincronizada.
 - [ ] Mensagem de primeiro acesso sincroniza, diagnostica e inicia o onboarding sem depender do atalho `/iniciar`.
 - [ ] Diagnóstico Bash passa em macOS/Linux.
@@ -26,6 +26,8 @@
 - [ ] `/iniciar` começa pela escolha entre uso real, demonstração, importação e retomada.
 - [ ] `/iniciar` não lê fora da raiz sem caminho e confirmação explícitos.
 - [ ] `/iniciar` não altera skills, ferramentas ou documentação durante o uso normal.
+- [ ] Skill criada pelo usuário nasce em `skills/minhas/` e sobrevive à sincronização.
+- [ ] `/atualizar-os` atualiza uma instalação antiga sem mudar a impressão digital dos dados do usuário.
 - [ ] Perfil e prioridade ficam salvos.
 - [ ] Projeto fica registrado sem copiar código para o OS.
 - [ ] Fonte bruta fica preservada.

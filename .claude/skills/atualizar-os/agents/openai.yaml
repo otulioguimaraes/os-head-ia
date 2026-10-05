@@ -1,0 +1,4 @@
+interface:
+  display_name: "Atualizar o OS"
+  short_description: "Atualize o OS sem perder seus dados"
+  default_prompt: "Use $atualizar-os para atualizar este OS a partir da versão nova que eu baixei."

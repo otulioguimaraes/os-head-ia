@@ -21,7 +21,7 @@ Passo a passo por sistema: [GUIA-INSTALACAO.md](GUIA-INSTALACAO.md).
 
 1. Baixe o ZIP ou clone o repositório entregue pelo professor.
 2. Se for ZIP, descompacte-o em Documentos ou outra pasta de trabalho.
-3. Abra a pasta `os-head-ia-v0` inteira no agente.
+3. Abra a pasta `os-head-ia-v0.6` inteira no agente.
 4. Copie a mensagem de primeiro acesso de `COMECE-AQUI.md` e envie ao agente.
 
 ### 2. Iniciar — 8 min

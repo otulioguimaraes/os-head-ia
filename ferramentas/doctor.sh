@@ -21,24 +21,37 @@ for file in README.md COMECE-AQUI.md AGENTS.md CLAUDE.md COMANDOS.md memoria.md 
   fi
 done
 
+PRODUCT_EXPECTED=15
 SKILL_COUNT="$(find "$OS_ROOT/skills/os" -mindepth 2 -maxdepth 2 -name SKILL.md -type f 2>/dev/null | wc -l | tr -d ' ')"
-if [[ "$SKILL_COUNT" -eq 13 ]]; then
-  ok "13 skills canônicas encontradas"
+if [[ "$SKILL_COUNT" -eq "$PRODUCT_EXPECTED" ]]; then
+  ok "$PRODUCT_EXPECTED skills do produto encontradas"
 else
-  fail "esperava 13 skills; encontrei $SKILL_COUNT"
+  fail "esperava $PRODUCT_EXPECTED skills do produto; encontrei $SKILL_COUNT"
 fi
+
+USER_COUNT="$(find "$OS_ROOT/skills/minhas" -mindepth 2 -maxdepth 2 -name SKILL.md -type f 2>/dev/null | wc -l | tr -d ' ')"
+ok "$USER_COUNT skill(s) suas em skills/minhas/"
+
+# Monta o conjunto esperado (produto + suas) para comparar com o instalado.
+EXPECTED_DIR="$(mktemp -d)"
+trap 'rm -rf -- "$EXPECTED_DIR"' EXIT
+for skill_dir in "$OS_ROOT"/skills/os/* "$OS_ROOT"/skills/minhas/*; do
+  [[ -d "$skill_dir" && -f "$skill_dir/SKILL.md" ]] || continue
+  cp -R "$skill_dir" "$EXPECTED_DIR/$(basename "$skill_dir")"
+done
+TOTAL_EXPECTED="$(find "$EXPECTED_DIR" -mindepth 2 -maxdepth 2 -name SKILL.md -type f | wc -l | tr -d ' ')"
 
 check_installed_skills() {
   local label="$1"
   local target="$2"
   local count
   count="$(find "$target" -mindepth 2 -maxdepth 2 -name SKILL.md -type f 2>/dev/null | wc -l | tr -d ' ')"
-  if [[ "$count" -ne 13 ]]; then
-    fail "$label: esperava 13 skills instaladas; encontrei $count. Rode skills/sync-skills.sh"
+  if [[ "$count" -ne "$TOTAL_EXPECTED" ]]; then
+    fail "$label: esperava $TOTAL_EXPECTED skills instaladas; encontrei $count. Rode skills/sync-skills.sh"
     return
   fi
-  if diff -qr "$OS_ROOT/skills/os" "$target" >/dev/null 2>&1; then
-    ok "$label: 13 skills instaladas e sincronizadas"
+  if diff -qr "$EXPECTED_DIR" "$target" >/dev/null 2>&1; then
+    ok "$label: $TOTAL_EXPECTED skills instaladas e sincronizadas"
   else
     fail "$label: skills instaladas estão desatualizadas. Rode skills/sync-skills.sh"
   fi

@@ -37,7 +37,7 @@ Não inclua credenciais. Para fonte ainda não conectada, registre o fallback ma
 
 ## 3. Executar manualmente
 
-Peça um conjunto pequeno de dados reais ou use `dados-demo/` com marcação explícita. Execute a rotina uma vez sem agendamento.
+Peça um conjunto pequeno de dados reais ou use `dados-demo/` com marcação explícita. Se a rotina processa arquivos que chegam com o tempo (ex.: faturas), defina uma pasta fixa de entrada, como `entrada/faturas/`, fora do `_inbox/` (o `_inbox/` é a fila de ingestão e se esvazia), e inclua o passo: *"se não houver arquivo novo desde a última execução, registre `sem arquivo novo` e pare"*. Execute a rotina uma vez sem agendamento.
 
 Registre no contrato:
 
@@ -51,7 +51,7 @@ Salve a saída em `saidas/rotinas/<slug>/AAAA-MM-DD.md`.
 
 ## 4. Avaliar maturidade
 
-Mantenha `DRAFT` por pelo menos uma semana de uso ou até haver evidência suficiente. Só proponha automação se:
+Mantenha `DRAFT` até haver **pelo menos uma execução manual aprovada pelo usuário**. Só proponha agendamento (seção 5) se:
 
 - entradas são estáveis;
 - falhas são visíveis;
@@ -59,5 +59,24 @@ Mantenha `DRAFT` por pelo menos uma semana de uso ou até haver evidência sufic
 - ações externas têm confirmação;
 - existe forma de pausar e retomar.
 
-Não crie agendamento automaticamente. Termine com o próximo teste manual recomendado.
+Não crie agendamento por conta própria: o agendamento é feito pelo usuário, com a sua orientação (seção 5). Se o usuário não pediu para agendar, termine com o próximo teste manual recomendado.
+
+## 5. Escolher o nível de autonomia (quando o usuário pedir para agendar)
+
+Leia `guias/rotinas/niveis-de-autonomia.md` e mostre os quatro níveis em uma tabela curta. Recomende o **menor nível que resolve**:
+
+1. **Você chama** — o usuário roda o comando quando quer.
+2. **Agendada no seu computador** — roda no horário com o computador ligado e o app aberto. Lê a pasta do OS.
+3. **Agendada na nuvem** — roda com o computador desligado, mas **não lê a pasta local**; precisa de repositório ou de fontes na nuvem.
+4. **Servidor sempre ligado** — VPS. Assunto de agente, não de rotina simples.
+
+Só ofereça o nível 2 ou acima depois de **pelo menos uma execução manual aprovada** e se a rotina:
+
+- só lê e escreve dentro do OS (rascunho, resumo, relatório);
+- não envia, não publica, não paga e não apaga nada sem aprovação;
+- tem saída num lugar fixo (`saidas/rotinas/<slug>/`).
+
+Para o nível 2, guie o usuário pelo app que ele usa (os nomes estão no guia). O usuário cria o agendamento com as próprias mãos; você escreve o texto das instruções da tarefa agendada, que deve ser: *"Na pasta deste OS, execute a rotina descrita em `rotinas/<slug>.md` e salve a saída em `saidas/rotinas/<slug>/`. Não execute nenhuma ação externa."*
+
+Para provar o agendamento sem esperar o mês inteiro, crie primeiro um **disparo de teste** para daqui a poucos minutos, confira a saída e só então ajuste para a frequência real. Depois do primeiro disparo agendado, confira a saída com o usuário e registre no contrato: `estado: AGENDADA (nível N, <app>, <frequência>)`. Se algo falhar, volte para `DRAFT`.
 

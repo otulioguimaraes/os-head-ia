@@ -37,9 +37,9 @@ Esta bifurcação é obrigatória:
 Se o onboarding já estiver concluído, não execute automaticamente o próximo passo. Mostre um resumo curto e pergunte se o usuário quer:
 
 1. retomar o próximo passo registrado;
-2. conectar uma nova fonte;
-3. consultar o que o OS já sabe;
-4. apenas revisar o estado.
+2. mapear e priorizar as fontes do seu trabalho;
+3. conectar uma fonte que já escolheu;
+4. consultar ou revisar o que o OS já sabe.
 
 Se ainda não começou, diga `Tudo pronto.` e faça somente esta primeira pergunta:
 
@@ -158,7 +158,8 @@ Seu OS está ativo.
 ✓ ponto de retomada
 
 Agora use o OS normalmente e encerre trabalhos úteis com /sessao.
-Para adicionar outra fonte depois, use /conectar.
+Próximo passo recomendado: use /mapear-fontes para descobrir e priorizar o que vale conectar.
+Se já souber qual fonte quer adicionar, use /conectar.
 ```
 
 Inclua links relativos para os arquivos criados, sem transformar a resposta num relatório técnico.
