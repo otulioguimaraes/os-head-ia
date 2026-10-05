@@ -8,14 +8,17 @@
 ## Exercício 1 — Uma reunião entra no OS (15 min)
 
 **Seu arquivo:** a transcrição de uma reunião sua (Fathom, Zoom, Meet, tl;dv, Fireflies) ou uma ata.
-**Arquivo de treino:** [`1-reuniao/2026-10-06-reuniao-proposta-clinica-horizonte-DEMO.md`](1-reuniao/2026-10-06-reuniao-proposta-clinica-horizonte-DEMO.md)
+**Arquivos de treino:** três reuniões DEMO da Orbe Studio, em dias seguidos, que se conectam (mesmas pessoas, mesmos prazos, uma decisão que muda e um conflito de agenda):
+- [`2026-10-06` — proposta para a Clínica Horizonte](1-reuniao/2026-10-06-reuniao-proposta-clinica-horizonte-DEMO.md)
+- [`2026-10-07` — reunião semanal do time](1-reuniao/2026-10-07-reuniao-semanal-time-orbe-DEMO.md)
+- [`2026-10-08` — diagnóstico da Clínica Vida](1-reuniao/2026-10-08-reuniao-diagnostico-clinica-vida-DEMO.md)
 
 1. Coloque o arquivo dentro de `_inbox/`.
 2. Peça:
    > Faça a ingestão do arquivo que coloquei no `_inbox/`.
 3. Abra `conhecimento/` e veja o que nasceu: o original guardado em `raw/` e a nota com decisões, responsáveis e prazos em `paginas/`. Com uma reunião real, também podem nascer páginas de pessoas e empresas.
-4. Faça uma pergunta sobre a reunião. Com o arquivo DEMO:
-   > O que ficou decidido sobre a proposta da Clínica Horizonte, quem ficou com cada próximo passo e o que ficou em aberto?
+4. Faça uma pergunta sobre a reunião. Com as três reuniões DEMO, pergunte algo que **só aparece cruzando as três**:
+   > Como está a agenda de novembro da Orbe, o que mudou na proposta da Horizonte desde o dia 6 e o que a Marina precisa confirmar para a Clínica Vida, e até quando?
 
 **Pronto quando:** a resposta cita o arquivo de origem e existe pelo menos uma página nova em `conhecimento/`.
 

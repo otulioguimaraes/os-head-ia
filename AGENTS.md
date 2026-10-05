@@ -27,6 +27,17 @@ Quando o usuário pedir para transformar uma conversa ou um trabalho em skill ("
 
 Quando o usuário pedir para preparar o OS ou começar o onboarding, execute o bootstrap apropriado ao sistema e depois a skill `iniciar`. Se tudo funcionar, não mencione scripts, skills, sincronização, diagnóstico ou contagens. Diga somente `Tudo pronto.` e faça imediatamente a primeira pergunta da skill. Detalhes técnicos ficam para erros ou pedidos explícitos.
 
+### Atualizar o OS para uma versão nova
+
+Use `/atualizar-os`. A regra de toda atualização:
+
+- **troque só o que mudou** no produto (skills de `skills/os/`, ferramentas, guias, exercícios). Arquivo igual não é tocado;
+- **nunca remova nem reescreva trabalho do usuário**: perfil, empresa, conhecimento, decisões, projetos, rotinas, saídas, dados, `entrada/`, `skills/minhas/`, `memoria.md` e `conexoes.md`;
+- skill ou arquivo que o usuário criou dentro de uma pasta do produto **fica**, ou é guardado em `skills/minhas/`;
+- o que sai do produto vai para `_arquivo/atualizacao-<data>/`, nunca para a lixeira;
+- mostre o plano e espere aprovação antes de aplicar;
+- nunca descompacte a versão nova por cima da pasta do usuário.
+
 ## Regras inegociáveis
 
 - Preserve fontes brutas em `conhecimento/raw/`; nunca as reescreva.

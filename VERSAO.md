@@ -1,10 +1,15 @@
 # Versão do OS Head de IA
 
-- versão: `0.6.0`
+- versão: `0.6.1`
 - data: `2026-10-06`
 - estágio: piloto da Formação Head de IA
 
-## Mudanças desta versão (0.6.0 — Encontro 4)
+## Mudanças da versão 0.6.1
+
+- exercício 1 ganha três reuniões DEMO ligadas entre si (proposta da Clínica Horizonte, reunião semanal do time, diagnóstico da Clínica Vida), para a consulta cruzar fontes;
+- `AGENTS.md` ganha a regra de atualização: trocar só o que mudou e nunca remover trabalho do usuário.
+
+## Mudanças da versão 0.6.0 (Encontro 4)
 
 - **suas skills ganham pasta própria:** `skills/minhas/<nome>/`. A sincronização copia as skills do produto e as suas para o Claude e o Codex. Antes, uma skill criada direto em `.claude/skills/` sumia na sincronização seguinte;
 - `AGENTS.md` ensina o modelo a criar skill do usuário no lugar certo e a sincronizar;
