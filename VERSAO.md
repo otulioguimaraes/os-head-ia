@@ -1,8 +1,12 @@
 # Versão do OS Head de IA
 
-- versão: `0.6.2`
-- data: `2026-10-06`
+- versão: `0.6.3`
+- data: `2026-10-07`
 - estágio: piloto da Formação Head de IA
+
+## Mudanças da versão 0.6.3
+
+- `/conectar-treg`: a primeira chamada passa país e idioma do Brasil (`country: "br"`, `language: "pt"` ou a cidade). Sem isso, vários fornecedores da TREG devolvem resultados dos Estados Unidos, em inglês. Exemplo testado: busca "ótica em Goiânia" por US$ 0,002, com 9 resultados de Goiânia.
 
 ## Mudanças da versão 0.6.2
 

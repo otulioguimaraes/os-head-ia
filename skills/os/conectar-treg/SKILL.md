@@ -73,8 +73,9 @@ Os nomes dos menus mudam entre versões dos apps. Se o usuário não achar, peç
 2. Para as 2 ou 3 melhores opções, leia `catalog_get` / `treg catalog get <id>` e mostre numa tabela: o que faz, entradas que pede, **preço**, taxa de sucesso.
 3. Escolha pela ordem: (a) a opção que aceita as entradas que o usuário **tem**; (b) a mais confiável; (c) a mais barata.
 4. Diga: *"Esta chamada custa até US$ X. Posso fazer uma?"* Espere o OK.
-5. Faça **uma** chamada. Se o modo de chamada permitir um teto de custo (cabeçalho `X-Treg-Route-Max-Cost`), use `0.05`.
-6. Mostre o resultado em linguagem simples e o **custo real** devolvido pela chamada.
+5. **Resultado do Brasil? Diga o país e o idioma na chamada.** Sem isso, muitos fornecedores devolvem resultados dos **Estados Unidos, em inglês**. No caminho automático `treg.google.serp.organic`, passe `country: "br"` e `language: "pt"`. Em fornecedor que pede local, passe a cidade, por exemplo `location_name: "Goiania,State of Goias,Brazil"` e `language_code: "pt"`. Exemplo testado em 2026-10-05: `dataforseo.google.serp.organic`, busca "ótica em Goiânia", custou US$ 0,002 e trouxe 9 resultados de Goiânia.
+6. Faça **uma** chamada. Se o modo de chamada permitir um teto de custo (cabeçalho `X-Treg-Route-Max-Cost`), use `0.05`.
+7. Mostre o resultado em linguagem simples e o **custo real** devolvido pela chamada.
 
 Para mais de uma chamada (uma lista inteira, por exemplo), calcule o total antes (`preço × quantidade`) e peça OK para o total.
 
