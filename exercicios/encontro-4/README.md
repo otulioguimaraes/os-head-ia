@@ -5,27 +5,39 @@
 
 ---
 
-## Exercício 1 — Uma reunião entra no OS (15 min)
+## Exercício 1 — O seu material entra no OS (15 min)
 
-**Seu arquivo:** a transcrição de uma reunião sua (Fathom, Zoom, Meet, tl;dv, Fireflies) ou uma ata.
-**Arquivos de treino:** três reuniões DEMO da Orbe Studio, em dias seguidos, que se conectam (mesmas pessoas, mesmos prazos, uma decisão que muda e um conflito de agenda):
-- [`2026-10-06` — proposta para a Clínica Horizonte](1-reuniao/2026-10-06-reuniao-proposta-clinica-horizonte-DEMO.md)
-- [`2026-10-07` — reunião semanal do time](1-reuniao/2026-10-07-reuniao-semanal-time-orbe-DEMO.md)
-- [`2026-10-08` — diagnóstico da Clínica Vida](1-reuniao/2026-10-08-reuniao-diagnostico-clinica-vida-DEMO.md)
+**Seu material:** o que você usa para trabalhar: a transcrição de uma reunião (Fathom, Zoom, Meet, tl;dv, Fireflies), uma ata, um e-mail importante, uma conversa exportada, uma proposta, um documento interno. Comece com 2 ou 3 arquivos sobre o mesmo assunto.
+**Arquivos de treino:** a pasta [`1-ingestao/`](1-ingestao/) traz **8 fontes DEMO da Orbe Studio**, de 01 a 09/10, que contam a mesma história por pedaços:
 
-1. Coloque o arquivo dentro de `_inbox/`.
+| Fonte | Tipo |
+|---|---|
+| `equipe-e-clientes-orbe-studio-DEMO.md` | documento interno: quem é quem e os clientes |
+| `2026-10-05-email-dr-henrique-pedido-de-proposta-DEMO.md` | e-mail do cliente |
+| `2026-10-06-reuniao-proposta-clinica-horizonte-DEMO.md` | reunião com o cliente |
+| `2026-10-07-reuniao-semanal-time-orbe-DEMO.md` | reunião do time |
+| `2026-10-07-whatsapp-marina-rafael-DEMO.md` | conversa de WhatsApp |
+| `2026-10-08-reuniao-diagnostico-clinica-vida-DEMO.md` | reunião com um cliente novo |
+| `2026-10-09-email-jorge-lista-de-faltas-DEMO.md` | e-mail do cliente novo |
+| `2026-10-09-proposta-comercial-horizonte-v2-DEMO.md` | proposta comercial |
+
+Nenhuma fonte sozinha conta a história inteira: uma decisão muda de um dia para o outro, uma pessoa nova aparece num e-mail, um sistema liga duas clínicas.
+
+1. Coloque os arquivos dentro de `_inbox/`.
 2. Peça:
-   > Faça a ingestão do arquivo que coloquei no `_inbox/`.
-3. Abra `conhecimento/` e veja o que nasceu: o original guardado em `raw/` e a nota com decisões, responsáveis e prazos em `paginas/`. Com uma reunião real, também podem nascer páginas de pessoas e empresas.
-4. Faça uma pergunta sobre a reunião. Com as três reuniões DEMO, pergunte algo que **só aparece cruzando as três**:
+   > Faça a ingestão dos arquivos que coloquei no `_inbox/`.
+3. Abra `conhecimento/paginas/` e veja o que nasceu: uma nota por fonte em `temas/`, **uma página por pessoa** em `pessoas/` e **uma por empresa** em `empresas/`, ligadas entre si. O original de cada fonte fica guardado em `conhecimento/raw/`.
+4. Faça uma pergunta que **só tem resposta cruzando as fontes**. Com os arquivos DEMO:
    > Como está a agenda de novembro da Orbe, o que mudou na proposta da Horizonte desde o dia 6 e o que a Marina precisa confirmar para a Clínica Vida, e até quando?
 
-**Pronto quando:** a resposta cita o arquivo de origem e existem páginas novas em `conhecimento/paginas/` para a reunião, para cada pessoa e para cada empresa citada, ligadas entre si.
-
-**Para o cérebro ganhar mais nós (opcional):** a pasta [`1-reuniao/documentos-extras/`](1-reuniao/documentos-extras/) traz mais 5 documentos DEMO da mesma história (dois e-mails, uma conversa de WhatsApp, a proposta comercial e a ficha da equipe). Eles apresentam gente e empresas novas que se cruzam com as reuniões: o Dr. Ricardo Lemos, que aprova acima de R$ 30 mil; a Tecnoclin, o sistema de agenda das duas clínicas; e a Clínica Sorriso Pleno, cliente antigo da Orbe. Coloque todos no `_inbox/`, peça a ingestão e depois rode:
+   Ou:
+   > Quem precisa aprovar a proposta da Horizonte, do que depende o início em 16 de novembro e o que a Clínica Vida tem em comum com a Horizonte?
+5. Veja o cérebro crescer:
    > /cerebro-3d
 
-   Você vê as pessoas, as empresas e os temas como pontos, e os links entre eles como conexões. (Precisa do Node.js 22 ou mais novo; a skill confere e explica como instalar.)
+   As pessoas, as empresas e os temas viram pontos; os links entre eles viram conexões. (Precisa do Node.js 22 ou mais novo; a skill confere e explica como instalar.)
+
+**Pronto quando:** a resposta cita os arquivos de origem e existem páginas em `conhecimento/paginas/` para as fontes, para cada pessoa e para cada empresa, ligadas entre si.
 
 ---
 

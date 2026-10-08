@@ -1,8 +1,12 @@
 # Versão do OS Head de IA
 
-- versão: `0.6.5`
+- versão: `0.6.6`
 - data: `2026-10-08`
 - estágio: piloto da Formação Head de IA
+
+## Mudanças da versão 0.6.6
+
+- exercício 1 vira **"O seu material entra no OS"**: a pasta `exercicios/encontro-4/1-reuniao/` passa a ser `1-ingestao/`, com as **8 fontes DEMO juntas** (3 reuniões, 2 e-mails, 1 conversa de WhatsApp, 1 proposta e 1 ficha da equipe). Ganha uma segunda pergunta cruzada e o passo `/cerebro-3d`. Testado em 08/10: a ingestão das 8 fontes gerou 8 notas, 10 pessoas e 6 empresas/sistemas, sem duplicata. Quem atualiza de uma versão anterior mantém a pasta antiga `1-reuniao/` (a atualização nunca apaga) e ganha a nova.
 
 ## Mudanças da versão 0.6.5
 
