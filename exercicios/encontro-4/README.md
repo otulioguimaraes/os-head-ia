@@ -20,7 +20,12 @@
 4. Faça uma pergunta sobre a reunião. Com as três reuniões DEMO, pergunte algo que **só aparece cruzando as três**:
    > Como está a agenda de novembro da Orbe, o que mudou na proposta da Horizonte desde o dia 6 e o que a Marina precisa confirmar para a Clínica Vida, e até quando?
 
-**Pronto quando:** a resposta cita o arquivo de origem e existe pelo menos uma página nova em `conhecimento/`.
+**Pronto quando:** a resposta cita o arquivo de origem e existem páginas novas em `conhecimento/paginas/` para a reunião, para cada pessoa e para cada empresa citada, ligadas entre si.
+
+**Para o cérebro ganhar mais nós (opcional):** a pasta [`1-reuniao/documentos-extras/`](1-reuniao/documentos-extras/) traz mais 5 documentos DEMO da mesma história (dois e-mails, uma conversa de WhatsApp, a proposta comercial e a ficha da equipe). Eles apresentam gente e empresas novas que se cruzam com as reuniões: o Dr. Ricardo Lemos, que aprova acima de R$ 30 mil; a Tecnoclin, o sistema de agenda das duas clínicas; e a Clínica Sorriso Pleno, cliente antigo da Orbe. Coloque todos no `_inbox/`, peça a ingestão e depois rode:
+   > /cerebro-3d
+
+   Você vê as pessoas, as empresas e os temas como pontos, e os links entre eles como conexões. (Precisa do Node.js 22 ou mais novo; a skill confere e explica como instalar.)
 
 ---
 

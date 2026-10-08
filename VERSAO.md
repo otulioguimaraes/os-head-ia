@@ -1,8 +1,13 @@
 # Versão do OS Head de IA
 
-- versão: `0.6.4`
+- versão: `0.6.5`
 - data: `2026-10-08`
 - estágio: piloto da Formação Head de IA
+
+## Mudanças da versão 0.6.5
+
+- `/ingerir` passa a criar **três tipos de nota ligadas entre si**: a nota da fonte, uma página para cada pessoa citada com papel ou compromisso e uma página para cada empresa citada. Antes de criar, procura a página existente e atualiza, sem duplicar. Os links vão nos dois sentidos, e uma mudança de decisão entre fontes fica registrada com as duas datas. Antes, a skill criava uma nota só, e as pessoas ficavam soltas dentro das páginas de empresa;
+- exercício 1 ganha `1-reuniao/documentos-extras/`: mais 5 documentos DEMO da mesma história (e-mails, WhatsApp, proposta, ficha da equipe), com pessoas e empresas novas que se cruzam com as reuniões, para o `/cerebro-3d` ter nós e conexões de verdade.
 
 ## Mudanças da versão 0.6.4
 
