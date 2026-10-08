@@ -6,7 +6,7 @@
 - [ ] Não contém caminhos pessoais, credenciais ou dados reais do professor.
 - [ ] `COMECE-AQUI.md` é visível na raiz.
 - [ ] Estrutura funciona em pasta com espaços no nome.
-- [ ] ZIP contém quinze skills em `.agents/skills/` e quinze em `.claude/skills/`.
+- [ ] ZIP contém dezesseis skills em `.agents/skills/` e dezesseis em `.claude/skills/`.
 - [ ] ZIP contém o squad `squads/brand-system-builder/` completo.
 - [ ] ZIP do aluno não contém a skill interna `/modo-publico`.
 
@@ -14,7 +14,7 @@
 
 - [ ] Codex lê `AGENTS.md` e executa a skill canônica.
 - [ ] Claude Code lê `CLAUDE.md` e executa a skill canônica.
-- [ ] Sincronização gera as quinze skills do produto mais as de `skills/minhas/` nos dois destinos locais e remove cópias obsoletas.
+- [ ] Sincronização gera as dezesseis skills do produto mais as de `skills/minhas/` nos dois destinos locais e remove cópias obsoletas.
 - [ ] Diagnóstico falha de forma acionável quando uma pasta de skills instaladas está ausente ou dessincronizada.
 - [ ] Mensagem de primeiro acesso sincroniza, diagnostica e inicia o onboarding sem depender do atalho `/iniciar`.
 - [ ] Diagnóstico Bash passa em macOS/Linux.

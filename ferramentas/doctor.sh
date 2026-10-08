@@ -21,7 +21,7 @@ for file in README.md COMECE-AQUI.md AGENTS.md CLAUDE.md COMANDOS.md memoria.md 
   fi
 done
 
-PRODUCT_EXPECTED=15
+PRODUCT_EXPECTED=16
 SKILL_COUNT="$(find "$OS_ROOT/skills/os" -mindepth 2 -maxdepth 2 -name SKILL.md -type f 2>/dev/null | wc -l | tr -d ' ')"
 if [[ "$SKILL_COUNT" -eq "$PRODUCT_EXPECTED" ]]; then
   ok "$PRODUCT_EXPECTED skills do produto encontradas"

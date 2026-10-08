@@ -39,7 +39,7 @@ Write-Host "Versao nova: $NewRoot (versao $NewV)"
 Write-Host ""
 
 $KnownProductSkills = @("iniciar", "registrar-projeto", "ingerir", "consultar", "sessao", "conectar", "mapear-fontes", "search-connectors",
-    "briefing-manha", "criar-rotina", "fechar-semana", "montar-semana", "design-system", "atualizar-os", "conectar-treg", "modo-publico")
+    "briefing-manha", "criar-rotina", "fechar-semana", "montar-semana", "design-system", "atualizar-os", "conectar-treg", "modo-publico", "cerebro-3d")
 function Test-ProductSkill([string]$Name) {
     return (($KnownProductSkills -contains $Name) -or (Test-Path (Join-Path $NewRoot "skills\os\$Name") -PathType Container))
 }

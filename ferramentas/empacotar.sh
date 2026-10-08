@@ -26,7 +26,7 @@ mkdir -p \
 
 for target in .agents/skills .claude/skills; do
   COUNT="$(find "$STAGING_DIR/$PACKAGE_DIR_NAME/$target" -mindepth 2 -maxdepth 2 -name SKILL.md -type f | wc -l | tr -d ' ')"
-  [[ "$COUNT" -eq 15 ]] || { echo "ERRO: pacote teria $COUNT skills em $target; esperava 15." >&2; exit 1; }
+  [[ "$COUNT" -eq 16 ]] || { echo "ERRO: pacote teria $COUNT skills em $target; esperava 16." >&2; exit 1; }
   diff -qr "$OS_ROOT/skills/os" "$STAGING_DIR/$PACKAGE_DIR_NAME/$target" >/dev/null || {
     echo "ERRO: skills empacotadas em $target estão dessincronizadas." >&2
     exit 1

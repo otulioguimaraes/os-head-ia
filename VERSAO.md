@@ -1,8 +1,13 @@
 # Versão do OS Head de IA
 
-- versão: `0.6.3`
-- data: `2026-10-07`
+- versão: `0.6.4`
+- data: `2026-10-08`
 - estágio: piloto da Formação Head de IA
+
+## Mudanças da versão 0.6.4
+
+- nova skill `/cerebro-3d`: transforma as notas do OS num cérebro 3D interativo e local (cada nota colorida pela categoria, links como conexões, animação **Ver crescer** e modo **Cinema**). O app nasce em `apps/cerebro-3d/`, que a atualização não toca. Exige Node.js 22 ou mais novo; a skill confere antes e explica como instalar. Base: skill `3d-brain` do AIS-OS (Nate Herk, MIT), com interface em português;
+- diagnóstico, verificador e empacotador passam a esperar dezesseis skills do produto.
 
 ## Mudanças da versão 0.6.3
 

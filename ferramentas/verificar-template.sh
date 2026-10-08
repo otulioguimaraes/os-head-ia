@@ -17,7 +17,7 @@ for item in "${REQUIRED[@]}"; do
   [[ -f "$OS_ROOT/$item" ]] || { echo "ERRO: arquivo obrigatório ausente: $item" >&2; exit 1; }
 done
 
-EXPECTED_SKILLS=(iniciar registrar-projeto ingerir consultar sessao conectar mapear-fontes search-connectors briefing-manha criar-rotina fechar-semana montar-semana design-system atualizar-os conectar-treg)
+EXPECTED_SKILLS=(iniciar registrar-projeto ingerir consultar sessao conectar mapear-fontes search-connectors briefing-manha criar-rotina fechar-semana montar-semana design-system atualizar-os conectar-treg cerebro-3d)
 for skill in "${EXPECTED_SKILLS[@]}"; do
   [[ -f "$OS_ROOT/skills/os/$skill/SKILL.md" ]] || { echo "ERRO: skill ausente: $skill" >&2; exit 1; }
 done

@@ -19,7 +19,7 @@ foreach ($File in $RequiredFiles) {
     else { Write-Failure "$File ausente" }
 }
 
-$ProductExpected = 15
+$ProductExpected = 16
 $SkillCount = @(Get-ChildItem -Force -Path (Join-Path $OsRoot "skills\os") -Directory -ErrorAction SilentlyContinue | Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") -PathType Leaf }).Count
 if ($SkillCount -eq $ProductExpected) { Write-Ok "$ProductExpected skills do produto encontradas" }
 else { Write-Failure "esperava $ProductExpected skills do produto; encontrei $SkillCount" }

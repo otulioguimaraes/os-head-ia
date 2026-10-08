@@ -42,7 +42,7 @@ echo "Versão nova: $NEW_ROOT (versão ${NEW_V:-desconhecida})"
 echo
 
 # Toda skill que já veio no pacote, em qualquer versão (0.3 a 0.6).
-KNOWN_PRODUCT_SKILLS=" iniciar registrar-projeto ingerir consultar sessao conectar mapear-fontes search-connectors briefing-manha criar-rotina fechar-semana montar-semana design-system atualizar-os conectar-treg modo-publico "
+KNOWN_PRODUCT_SKILLS=" iniciar registrar-projeto ingerir consultar sessao conectar mapear-fontes search-connectors briefing-manha criar-rotina fechar-semana montar-semana design-system atualizar-os conectar-treg cerebro-3d modo-publico "
 is_product_skill() { [[ "$KNOWN_PRODUCT_SKILLS" == *" $1 "* || -d "$NEW_ROOT/skills/os/$1" ]]; }
 
 PRODUCT_DIRS=(skills/os ferramentas guias squads dados-demo exercicios rotinas/modelos)

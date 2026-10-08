@@ -27,6 +27,7 @@ Você também pode pedir em linguagem natural.
 
 | `/atualizar-os` | Atualizar este OS para uma versão nova sem tocar nos seus dados | plano de atualização + `_arquivo/atualizacao-<data>/` |
 | `/conectar-treg` | Conectar a TREG (catálogo de APIs com preço por chamada) e fazer a primeira chamada com preço aprovado | registro em `conexoes.md` |
+| `/cerebro-3d` | Ver o segundo cérebro em 3D: cada nota vira um ponto, os links viram conexões, com animação de crescimento e modo Cinema (precisa de Node.js 22+) | app local em `apps/cerebro-3d/` |
 
 Esses comandos ficam fora da primeira tela do onboarding. Eles aparecem depois que o aluno já provou perfil, projeto, fonte, briefing e retomada.
 
